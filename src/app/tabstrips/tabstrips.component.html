@@ -1,0 +1,82 @@
+<kendo-tabstrip (tabSelect)="onTabSelect($event)">
+  <!-- Tab 1: Dashboard -->
+  <kendo-tabstrip-tab [selected]="selectedTab === 0">
+    <ng-template kendoTabTitle>
+      <i class="fas fa-tachometer-alt"></i> Dashboard
+    </ng-template>
+    <ng-template kendoTabContent>
+      <p>Dashboard content goes here</p>
+    </ng-template>
+  </kendo-tabstrip-tab>
+
+  <!-- Tab 2: Agent Management -->
+  <kendo-tabstrip-tab [selected]="selectedTab === 1">
+    <ng-template kendoTabTitle>
+      <i class="fas fa-users-cog"></i> Agent Management
+    </ng-template>
+    <ng-template kendoTabContent>
+      <p>Agent Management content goes here</p>
+    </ng-template>
+  </kendo-tabstrip-tab>
+
+  <!-- Tab 3: Calendar -->
+  <kendo-tabstrip-tab [selected]="selectedTab === 2">
+    <ng-template kendoTabTitle>
+      <i class="fas fa-calendar-alt"></i> Calendar
+    </ng-template>
+    <ng-template kendoTabContent>
+      <p>Calendar content goes here</p>
+    </ng-template>
+  </kendo-tabstrip-tab>
+
+  <!-- Tab 4: EZ Quote -->
+  <kendo-tabstrip-tab [selected]="selectedTab === 3">
+    <ng-template kendoTabTitle>
+      <i class="fas fa-comment-dollar"></i> EZ Quote
+    </ng-template>
+    <ng-template kendoTabContent>
+      <app-task-grid-layout/>
+    </ng-template>
+  </kendo-tabstrip-tab>
+
+  <!-- Tab 5: Lead Management -->
+  <kendo-tabstrip-tab [selected]="selectedTab === 4">
+    <ng-template kendoTabTitle>
+      <i class="fas fa-user-tie"></i> Lead Management
+    </ng-template>
+    <ng-template kendoTabContent>
+     <app-lead-management></app-lead-management>
+    </ng-template>
+  </kendo-tabstrip-tab>
+
+  <!-- Tab 6: Activities -->
+  <kendo-tabstrip-tab [selected]="selectedTab === 5">
+    <ng-template kendoTabTitle>
+      <i class="fas fa-tasks"></i> Activities
+    </ng-template>
+    <ng-template kendoTabContent>
+      <p>Activities content goes here</p>
+    </ng-template>
+  </kendo-tabstrip-tab>
+
+  <!-- Tab 7: Workflows -->
+  <kendo-tabstrip-tab [selected]="selectedTab === 6">
+    <ng-template kendoTabTitle>
+      <i class="fas fa-cogs"></i> Workflows
+    </ng-template>
+    <ng-template kendoTabContent>
+      <!-- <p>Workflows content goes here</p> -->
+   <app-workflows></app-workflows>
+    </ng-template>
+  </kendo-tabstrip-tab>
+
+  <!-- Tab 8: Chat -->
+  <kendo-tabstrip-tab [selected]="selectedTab === 7">
+    <ng-template kendoTabTitle>
+      <i class="fas fa-comments"></i> Chat
+    </ng-template>
+    <ng-template kendoTabContent>
+      <p>Chat content goes here</p>
+    </ng-template>
+  </kendo-tabstrip-tab>
+</kendo-tabstrip>

@@ -1,0 +1,101 @@
+/* Ensure the tabs are aligned to the left with bottom border */
+::ng-deep .k-tabstrip-items-wrapper.k-tabstrip-items-start {
+  justify-content: flex-start !important;
+  gap: 3px;
+  background: transparent !important;
+  border-bottom: 2px solid #28a745;
+}
+
+/* Base tab style */
+::ng-deep .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item .k-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  color: white;
+  border-radius: 4px 4px 0 0;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Default inactive tab style */
+::ng-deep .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item {
+  background-color: #006699; /* Blue background for inactive tabs */
+  color: white;
+  border-radius: 4px 4px 0 0;
+  margin-right: 2px;
+  transition: background-color 0.3s ease;
+  border-top-left-radius: var(--kendo-border-radius-md, 0.25rem);
+  border-top-right-radius: var(--kendo-border-radius-md, 0.25rem);
+  border-bottom-width: 0;
+}
+
+/* Active tab style */
+::ng-deep .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item.k-state-active {
+  background-color: #28a745 !important; /* Green background for active tab */
+  color: white !important;
+  font-weight: bold;
+  border-bottom: 3px solid #28a745; /* Green border at the bottom */
+  margin-bottom: -1px; /* Adjust bottom margin for alignment */
+}
+
+/* Active tab's link style */
+::ng-deep .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item.k-state-active .k-link {
+  background-color: #28a745 !important; /* Green background for active tab's link */
+  color: white !important;
+  font-weight: bold;
+}
+
+/* Hover effect on tab items */
+::ng-deep .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+/* Icon inside tab */
+::ng-deep .k-tabstrip-top .k-tabstrip-items-wrapper .k-item .k-link i {
+  font-size: 16px;
+  color: white;
+}
+
+/* Hover effect on tab link */
+::ng-deep .k-tabstrip-top .k-tabstrip-items-wrapper .k-item .k-link:hover {
+  background-color: #218838 !important; /* Dark green on hover */
+  color: white !important;
+}
+
+/* Content of active tab */
+::ng-deep .k-tabstrip .k-content.k-active {
+  padding: 20px;
+  background-color: #fff;
+  color: #333;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  ::ng-deep .k-tabstrip-top .k-tabstrip-items-wrapper .k-item .k-link {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+
+  ::ng-deep .k-tabstrip-top .k-tabstrip-items-wrapper .k-item .k-link i {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  ::ng-deep .k-tabstrip-top .k-tabstrip-items-wrapper .k-item .k-link {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  ::ng-deep .k-tabstrip-top .k-tabstrip-items-wrapper .k-item .k-link i {
+    font-size: 12px;
+  }
+}
+
+::ng-deep .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item.k-active{
+  background-color: #218838;
+}

@@ -1,0 +1,70 @@
+<div class="k-card p-4">
+  <!-- Header Section -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h5 class="k-text-info fw-bold m-0">Lead Management</h5>
+      <small class="k-text-info">Leads</small>
+    </div>
+    <div class="d-flex gap-2">
+      <button kendoButton icon="file-excel" (click)="exportToExcel()">Export to Excel</button>
+      <button kendoButton icon="plus" >Create Lead</button>
+    </div>
+  </div>
+
+  <!-- Toolbar Section -->
+  <div class="k-toolbar d-flex flex-wrap align-items-center justify-content-between gap-3 p-3 mt-3">
+  
+    <!-- Left Section: Dropdowns and Search -->
+    <div class="d-flex flex-wrap align-items-center gap-3">
+      <kendo-dropdownlist
+        [data]="['All Leads']"
+        [value]="'All Leads'"
+        [style.width.px]="150"
+      ></kendo-dropdownlist>
+  
+      <kendo-dropdownlist
+        [data]="['Select Saved Preferences']"
+        [value]="'Select Saved Preferences'"
+        [style.width.px]="200"
+      ></kendo-dropdownlist>
+  
+      <kendo-textbox
+        [(ngModel)]="searchKeyword"
+        placeholder="Type Search Keyword"
+        [style.width.px]="200"
+      >
+        <ng-template kendoTextBoxSuffix>
+          <button kendoButton icon="search" (click)="onSearch()"></button>
+        </ng-template>
+      </kendo-textbox>
+    </div>
+  
+    <!-- Right Section: Toggles and Action Buttons -->
+    <div class="d-flex flex-wrap align-items-center gap-3 ms-auto">
+      <!-- Toggle Switch for Intl and Non-Intl -->
+      <kendo-buttongroup selection="single" >
+        <button
+          kendoButton
+          [toggleable]="true"
+        
+          title="Align-left"
+        >Non Intl</button>
+        <button
+          kendoButton
+          [toggleable]="true"
+         
+          title="Align-center"
+        >Intl</button>
+      </kendo-buttongroup>
+      <!-- Action Buttons -->
+      <button kendoButton themeColor="success">Clear Filters</button>
+      <button kendoButton themeColor="success">Bulk Edit</button>
+      <button kendoButton themeColor="success">Save Preferences</button>
+      <button kendoButton icon="menu"></button>
+    </div>
+  </div>
+  
+  <app-task-grid></app-task-grid>
+  <!-- Grid Section -->
+  
+

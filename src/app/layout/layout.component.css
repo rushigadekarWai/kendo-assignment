@@ -1,0 +1,168 @@
+/* Navbar Styling */
+.navbar-custom {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Icon Container */
+.icon-container {
+  background-color: #002366;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.icon-container:hover {
+  background-color: #001a4d; /* Slightly darker on hover */
+}
+
+/* Badge Styling */
+.badge-custom {
+  background-color: #28a745;
+  font-size: 10px;
+  padding: 2px 5px;
+  line-height: 1;
+}
+
+/* Avatar Image */
+.avatar-img {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+/* Nav Links Styling */
+.navbar-nav .nav-link {
+  margin-left: 12px;
+  padding: 0;
+}
+
+/* Admin Info (Avatar + Text) */
+.admin-info {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background-color: #002366;
+  gap: 0.5rem;
+}
+
+.admin-info .admin-text {
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.admin-info .admin-text strong {
+  font-size: 0.85rem;
+}
+
+.admin-info .admin-text small {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.content-wrapper {
+  padding: 20px;
+  height: 100vh;
+}
+
+
+/* Tabstrip container styling */
+::ng-deep .kendo-tabstrip {
+  width: 100%;
+  margin-top: 20px; /* Space above the TabStrip */
+  border-radius: 8px; /* Rounded corners for TabStrip */
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding-top: 10px; /* Padding above the tab content */
+}
+
+/* Styling for each tab title */
+::ng-deep .kendo-tabstrip-tab {
+  padding: 12px 20px; /* Adjusted padding for better space */
+  background-color: #003366; /* Inactive tabs background color */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px; /* Space between the tabs */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-bottom: 3px solid transparent; /* Default transparent border below the tab */
+}
+
+/* Icon inside tabs */
+::ng-deep .kendo-tabstrip-tab i {
+  margin-right: 8px; /* Space between icon and tab title */
+  font-size: 18px; /* Size of the icons */
+}
+
+/* Active tab styling */
+::ng-deep .kendo-tabstrip-tab.k-state-active {
+  background-color: #28a745; /* Green background for active tab */
+  color: white; /* White text for active tab */
+  font-weight: bold; /* Bold text for active tab */
+  border-bottom: 3px solid #28a745; /* Green border below active tab */
+}
+
+/* Icon color for active tab */
+::ng-deep .kendo-tabstrip-tab.k-state-active i {
+  color: white; /* White icon for active tab */
+}
+
+/* Hover effect for tabs */
+::ng-deep .kendo-tabstrip-tab:hover {
+  background-color: #006699; /* Light blue on hover */
+}
+
+/* Styling for tab content */
+::ng-deep .kendo-tabstrip-tab .kendoTabContent {
+  padding: 20px;
+  background-color: #fff; /* White background for tab content */
+  color: #333; /* Text color for tab content */
+  border-top: 1px solid #ddd; /* Border between tab and content */
+  display: none; /* Hide inactive content */
+}
+
+/* Show active tab content */
+::ng-deep .kendo-tabstrip-tab.k-state-active .kendoTabContent {
+  display: block; /* Show active tab content */
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 767px) {
+  ::ng-deep .kendo-tabstrip-tab {
+    font-size: 14px; /* Smaller font size for mobile */
+    padding: 8px 16px; /* Less padding on smaller screens */
+  }
+
+  ::ng-deep .kendo-tabstrip-tab i {
+    font-size: 16px; /* Smaller icons for mobile */
+  }
+
+  ::ng-deep .kendo-tabstrip-tab.k-state-active {
+    background-color: #28a745; /* Keep green color for active tab on mobile */
+  }
+}
+
+@media (max-width: 576px) {
+  ::ng-deep .kendo-tabstrip-tab {
+    font-size: 12px; /* Even smaller font size for very small screens */
+    padding: 6px 12px; /* Smaller padding for mobile */
+  }
+
+  ::ng-deep .kendo-tabstrip-tab i {
+    font-size: 14px; /* Smaller icons for mobile */
+  }
+}

@@ -1,0 +1,108 @@
+/* General Card Styling */
+.k-card {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+/* Header Section */
+.k-card .d-flex.justify-content-between {
+  margin-bottom: 0;
+  border: none;
+}
+
+.k-card .fw-bold {
+  font-size: 1.2rem;
+  color: #0d6efd;
+}
+
+.k-card small.k-text-info {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.k-card .d-flex.gap-2 button {
+  margin-left: 5px;
+}
+
+/* Toolbar Section */
+.k-toolbar {
+  margin-bottom: 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.k-toolbar .d-flex {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Left Section */
+.k-toolbar .d-flex:first-child {
+  gap: 15px;
+}
+
+/* Right Section */
+.k-toolbar .ms-auto {
+  margin-left: auto !important;
+  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Dropdowns and Input Width */
+kendo-dropdownlist,
+kendo-textbox {
+  width: 200px;
+  max-width: 100%;
+}
+
+/* Toolbar Buttons */
+.k-toolbar button {
+  padding: 6px 15px;
+  white-space: nowrap;
+}
+
+/* Toggle Switch Spacing */
+.k-toolbar kendo-buttongroup {
+  margin-right: 10px;
+}
+
+/* Grid Section */
+.k-card .k-grid {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.kendo-grid {
+  width: 100%;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .k-toolbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .k-toolbar .d-flex:first-child,
+  .k-toolbar .ms-auto {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .k-toolbar button,
+  kendo-dropdownlist,
+  kendo-textbox {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .k-toolbar kendo-buttongroup {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

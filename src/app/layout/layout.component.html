@@ -1,0 +1,102 @@
+<nav class="navbar navbar-expand-lg navbar-custom  border border-1 border-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <div class="icon-container">
+              <i class="fas fa-envelope text-white"></i>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <div class="icon-container">
+              <i class="fas fa-cog text-white"></i>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <div class="position-relative icon-container">
+              <i class="fas fa-bell text-white"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-custom">
+                67
+              </span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <div class="icon-container">
+              <i class="fas fa-user text-white"></i>
+            </div>
+          </a>
+        </li>
+        <!-- Admin with avatar and label -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <div class="icon-container d-flex align-items-center px-3">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg"
+     alt="Admin Avatar"
+     class="rounded-circle me-3 avatar-img" />
+
+              <div class="d-flex flex-column text-white lh-sm">
+                <strong class="small">admin</strong>
+                <small>Admin</small>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- ROUTER OUTLET (Dynamic page content) -->
+<div class="content-wrapper border">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- 
+<div class="wrapper">
+  <kendo-tabstrip (tabSelect)="onTabSelect($event)">
+    <kendo-tabstrip-tab title="Paris" [selected]="true">
+      <ng-template kendoTabContent>
+        <div class="content">
+          <img src="assets/layout/tabstrip/rainy.png" />
+          <h2>17<span>ºC</span></h2>
+          <span>Rainy weather in Paris.</span>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+    <kendo-tabstrip-tab title="New York City">
+      <ng-template kendoTabContent>
+        <div class="content">
+          <img src="assets/layout/tabstrip/cloudy.png" />
+          <h2>19<span>ºC</span></h2>
+          <span>Cloudy weather in New York City.</span>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+    <kendo-tabstrip-tab title="Tallinn">
+      <ng-template kendoTabContent>
+        <div class="content">
+          <img src="assets/layout/tabstrip/sunny.png" />
+          <h2>23<span>ºC</span></h2>
+          <span>Sunny weather in Tallinn.</span>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+    <kendo-tabstrip-tab title="London">
+      <ng-template kendoTabContent>
+        <div class="content">
+          <img src="assets/layout/tabstrip/rainy.png" />
+          <h2>16<span>ºC</span></h2>
+          <span>Rainy weather in London.</span>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>
+</div> -->
+
+
