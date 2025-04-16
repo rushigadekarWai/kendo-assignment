@@ -1,0 +1,91 @@
+::ng-deep .k-grid {
+  background-color: #e6f7ff;
+  border: 1px solid #a0d8ef;
+  border-radius: 8px;
+  color: #003c57;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 121, 107, 0.1);
+  overflow: hidden;
+}
+
+::ng-deep .k-grid-header {
+  background-color: #00796b;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+::ng-deep .k-grid-header .k-header {
+  background-color: #00796b;
+  color: #ffffff;
+  border-right: 1px solid #004d40;
+}
+
+::ng-deep .k-grid td {
+  background-color: #ffffff;
+  border-color: #cceeff;
+  color: #003c57;
+}
+
+::ng-deep .k-grid td.k-sticky-cell {
+  background-color: #d0f0fd;
+  border-right: 1px solid #80deea;
+}
+
+::ng-deep .k-grid th.k-sticky-cell {
+  background-color: #004d40 !important;
+  color: #ffffff !important;
+  border-right: 1px solid #00796b;
+}
+
+::ng-deep .k-grid .k-alt {
+  background-color: #f1f8e9;
+}
+
+::ng-deep .k-grid tr:hover {
+  background-color: #c8e6c9;
+  transition: background 0.3s ease; /* Slightly longer transition for smoother effect */
+}
+
+::ng-deep .k-grid input[type="checkbox"] {
+  accent-color: #00796b;
+  transform: scale(1.3); /* Slightly larger checkboxes for better visibility */
+}
+
+::ng-deep .k-button.k-primary {
+  background-color: #00796b;
+  border-color: #004d40;
+  color: white;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+::ng-deep .k-button.k-primary:hover {
+  background-color: #00574b;
+}
+
+::ng-deep .k-button.k-primary:focus {
+  box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.3); /* Added focus effect for better accessibility */
+}
+
+/* Style for the Dropdown Button in Grid */
+::ng-deep .k-dropdown-button {
+  background-color: #00796b;
+  color: white;
+  border: 1px solid #004d40;
+  border-radius: 4px;
+}
+
+::ng-deep .k-dropdown-button:hover {
+  background-color: #00574b;
+  border-color: #003d33;
+}
+
+/* Styling for Dropdown Items */
+::ng-deep .k-dropdown-item {
+  color: #003c57;
+}
+
+::ng-deep .k-dropdown-item:hover {
+  background-color: #c8e6c9;
+  color: #004d40;
+}
+

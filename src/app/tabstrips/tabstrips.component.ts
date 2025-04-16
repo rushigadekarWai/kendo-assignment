@@ -11,6 +11,10 @@ import { RouterOutlet } from '@angular/router';
 import { WorkflowsComponent } from "../workflows/workflows.component";
 import { LeadManagementComponent } from "../lead-management/lead-management.component";
 import { TaskGridLayoutComponent } from "../task-grid-layout/task-grid-layout.component";
+import { AgentManagementComponent } from "../agent-management/agent-management.component";
+import { ExcelModule, ExcelService, KENDO_GRID_EXCEL_EXPORT } from '@progress/kendo-angular-grid';
+import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
+import { CalendarComponent } from "../calendar/calendar.component";
 
 @Component({
   selector: 'app-tabstrips',
@@ -31,8 +35,11 @@ import { TaskGridLayoutComponent } from "../task-grid-layout/task-grid-layout.co
     RouterOutlet,
     WorkflowsComponent,
     LeadManagementComponent,
-    TaskGridLayoutComponent
+    TaskGridLayoutComponent,
+    AgentManagementComponent, KENDO_GRID_EXCEL_EXPORT, ExcelModule, ExcelExportModule,
+    CalendarComponent
 ],
+providers: [ExcelService],
   templateUrl: './tabstrips.component.html',
   styleUrl: './tabstrips.component.css',
 })
