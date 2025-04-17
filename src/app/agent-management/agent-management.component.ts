@@ -18,10 +18,10 @@ import { KENDO_DATEPICKER } from '@progress/kendo-angular-dateinputs';
 @Component({
   selector: 'app-agent-management',
   imports: [KENDO_GRID, KENDO_GRIDLAYOUT, KENDO_BUTTONGROUP, KENDO_BUTTONGROUP, KENDO_TEMPLATE_CONTEXT, ReactiveFormsModule, KENDO_INPUTS, KENDO_TOOLBAR, GridModule, KENDO_TEMPLATE_CONTEXT, KENDO_TOOLBAR, KENDO_DROPDOWNLIST, KENDO_DROPDOWNBUTTON, KENDO_DROPDOWNS, DropDownButtonModule, DropDownsModule, CommonModule, KENDO_BUTTONGROUP, KENDO_BUTTONS, KENDO_EXCELEXPORT,
-KENDO_GRID_EXCEL_EXPORT,ExcelExportModule, ExcelModule, ExcelCommandDirective, FormsModule,KENDO_DATE, KENDO_DATEPICKER
+KENDO_GRID_EXCEL_EXPORT,ExcelExportModule, ExcelModule, FormsModule,KENDO_DATE, KENDO_DATEPICKER
   ],
   providers: [ExcelService],
-  templateUrl: './agent-management.component.html',
+  templateUrl:'./agent-management.component.html',
   styleUrl: './agent-management.component.css'
 })
 export class AgentManagementComponent {

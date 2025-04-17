@@ -26,13 +26,13 @@ import { CalendarComponent } from "../calendar/calendar.component";
     KENDO_AVATAR,
     LayoutModule,
     IndicatorsModule,
-    NgClass,
+   
     KENDO_TABSTRIP,
-    NgFor,
+  
     KENDO_DROPDOWNBUTTON,
     KENDO_DROPDOWNLIST,
     DropDownsModule,
-    RouterOutlet,
+
     WorkflowsComponent,
     LeadManagementComponent,
     TaskGridLayoutComponent,

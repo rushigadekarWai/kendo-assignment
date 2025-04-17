@@ -9,7 +9,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
-  imports: [KENDO_APPBAR, KENDO_SVGICON, IconsModule, KENDO_AVATAR, LayoutModule, IndicatorsModule,NgClass,KENDO_TABSTRIP,NgFor,RouterOutlet],
+  imports: [KENDO_APPBAR, KENDO_SVGICON, IconsModule, KENDO_AVATAR, LayoutModule, IndicatorsModule,KENDO_TABSTRIP,RouterOutlet],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })

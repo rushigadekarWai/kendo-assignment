@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-workflows',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './workflows.component.html',
   styleUrl: './workflows.component.css'
 })

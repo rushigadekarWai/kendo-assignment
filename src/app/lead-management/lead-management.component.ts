@@ -14,7 +14,7 @@ import { TaskGridLayoutComponent } from "../task-grid-layout/task-grid-layout.co
 
 @Component({
   selector: 'app-lead-management',
-  imports: [KENDO_GRID, KENDO_SVGICON, KENDO_TEXTBOX, KENDO_ICONS, KENDO_TEXTBOX, KENDO_DROPDOWNLIST, KENDO_BUTTON, FormsModule, KENDO_TOOLBAR, ToolBarModule, KENDO_BUTTON, KENDO_TOGGLEBUTTONTABSTOP, DropDownsModule, KENDO_BUTTONGROUP, KENDO_SWITCH, TaskGridComponent, TaskGridLayoutComponent],
+  imports: [KENDO_GRID, KENDO_SVGICON, KENDO_TEXTBOX, KENDO_ICONS, KENDO_TEXTBOX, KENDO_DROPDOWNLIST, KENDO_BUTTON, FormsModule, KENDO_TOOLBAR, ToolBarModule, KENDO_BUTTON, KENDO_TOGGLEBUTTONTABSTOP, DropDownsModule, KENDO_BUTTONGROUP, KENDO_SWITCH, TaskGridComponent, ],
   templateUrl: './lead-management.component.html',
   styleUrl: './lead-management.component.css'
 })

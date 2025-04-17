@@ -5,7 +5,7 @@ import { KENDO_BUTTONS } from "@progress/kendo-angular-buttons";
 import { LayoutComponent } from "./layout/layout.component";
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TaskGridComponent, KENDO_BUTTONS, LayoutComponent],
+  imports: [RouterOutlet, KENDO_BUTTONS],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   styles: [

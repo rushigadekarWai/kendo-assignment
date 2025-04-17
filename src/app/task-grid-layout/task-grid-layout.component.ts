@@ -22,7 +22,6 @@ import { KENDO_DIALOG } from '@progress/kendo-angular-dialog';
   selector: 'app-task-grid-layout',
   imports: [
     DropDownsModule,
-    DropDownListComponent,
     ReactiveFormsModule,
     
     KENDO_SVGICON,
@@ -30,19 +29,17 @@ import { KENDO_DIALOG } from '@progress/kendo-angular-dialog';
     KENDO_AVATAR,
     LayoutModule,
     IndicatorsModule,
-    NgClass,
+    
     KENDO_TABSTRIP,
-    NgFor,
     KENDO_DROPDOWNBUTTON,
     KENDO_DROPDOWNLIST,
     DropDownsModule,
-    RouterOutlet,
     KENDO_ICONS,
     KENDO_BUTTON,
     KENDO_BUTTONS,
     KENDO_GRID,
     KENDO_GRIDLAYOUT,
-    KENDO_DROPDOWNLIST,
+   
     KENDO_GRIDLAYOUT,
     KENDO_BUTTONGROUP,
     KENDO_INPUTS,
@@ -50,7 +47,7 @@ import { KENDO_DIALOG } from '@progress/kendo-angular-dialog';
     KENDO_TOOLBAR,
     KENDO_APPBAR,
     KENDO_DROPDOWNBUTTON,
-    KENDO_TOGGLEBUTTONTABSTOP, DropDownsModule, KENDO_CHECKBOX,NgClass, KENDO_TEXTBOX,KENDO_DIALOG, KENDO_DROPDOWNBUTTON, NgIf
+    KENDO_TOGGLEBUTTONTABSTOP, DropDownsModule, KENDO_CHECKBOX, KENDO_TEXTBOX,KENDO_DIALOG, KENDO_DROPDOWNBUTTON,
     
   ],
   templateUrl: './task-grid-layout.component.html',

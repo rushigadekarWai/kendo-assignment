@@ -1,0 +1,115 @@
+/* General Card Styling */
+kendo-card {
+  margin: 20px auto;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Card Header */
+kendo-card-body > .d-flex.justify-content-between {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+kendo-card-body h5 {
+  font-size: 1.25rem;
+  color: #0078d7;
+}
+
+kendo-card-body small {
+  color: #0078d7;
+}
+
+/* Buttons */
+button[kendobutton], .k-button {
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+button[kendobutton][icon="file-excel"] {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+}
+
+button[kendobutton][icon="plus"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+/* Grid Container */
+.kendo-grid-wrapper {
+  margin-top: 20px;
+}
+
+/* Grid Header */
+.k-grid-header th {
+  font-size: 0.875rem;
+  font-weight: 600;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+/* Grid Body Cells */
+.k-grid tbody td {
+  font-size: 0.85rem;
+  padding: 8px 10px;
+}
+
+/* Edit Inputs */
+.k-grid input[type="text"],
+.k-grid input[type="email"],
+.k-grid input[type="tel"],
+.k-grid input[type="number"],
+.k-grid input[type="date"],
+.k-grid input[type="checkbox"] {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 0.85rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Checkbox Inputs */
+.k-grid input[type="checkbox"] {
+  width: auto;
+}
+
+/* Dropdown Button */
+kendo-dropdownbutton {
+  width: 100%;
+}
+
+/* Button Container in Actions Column */
+.button-container {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.button-container .k-button {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 4px;
+}
+
+/* Responsive fix */
+@media (max-width: 768px) {
+  .kendo-grid-wrapper {
+    overflow-x: auto;
+  }
+  
+  kendo-card-body > .d-flex.justify-content-between {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

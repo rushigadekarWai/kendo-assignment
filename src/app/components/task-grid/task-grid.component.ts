@@ -8,7 +8,7 @@ import { alignCenterIcon, alignJustifyIcon, alignLeftIcon, alignRightIcon, boldI
 @Component({
   selector: 'app-task-grid',
   standalone: true,
-  imports: [GridModule,FormsModule,NgClass, KENDO_GRID, KENDO_DROPDOWNBUTTON],
+  imports: [GridModule,FormsModule, KENDO_GRID, KENDO_DROPDOWNBUTTON],
   templateUrl: './task-grid.component.html',
   styleUrl: './task-grid.component.css'
 })
