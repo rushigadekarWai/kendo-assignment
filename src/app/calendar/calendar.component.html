@@ -1,31 +1,157 @@
-<kendo-card width="100%" class="border border-2 border-dark">
-  <kendo-card-body>
-    <!-- Header -->
+<kendo-card width="100%">
+
+  <kendo-card-header class=" mt-2">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <div>
         <h5 class="k-text-info fw-bold m-0">Lead Management</h5>
         <small class="k-text-info">Leads</small>
       </div>
       <div class="d-flex gap-2">
-        <button kendoButton>Export to Excel</button>
+        <button kendoButton [themeColor]="'success'" (click)="exportToExcel()">Export to Excel </button>
+        <!-- <button type="button" kendoGridExcelCommand >
+          Export to Excel
+        </button> -->
         <button kendoButton>Create Lead</button>
+        <!-- <button kendoButton [themeColor]="'success'" (click)="addNewRow()">
+          Create Lead
+        </button> -->
+        <!-- <button kendoGridAddCommand type="button">Add new</button> -->
       </div>
     </div>
+  </kendo-card-header>
+  <kendo-card-body class="border border-2 border-success rounded-1 m-2 ">
+    <!-- Header -->
+
+
+
+
+    <div class="toolbar-container d-flex flex-wrap align-items-center justify-content-between gap-2 p-3">
+
+
+
+      <div class="d-flex flex-wrap align-items-center gap-2">
+        <kendo-dropdownlist [data]="leadOptions" [(ngModel)]="selectedLead" [defaultItem]="'All Leads'"
+          style="width: 160px;">
+        </kendo-dropdownlist>
+
+        <kendo-dropdownlist [data]="savedPreferences" [(ngModel)]="selectedPreference"
+          [defaultItem]="'Select Saved Preferences'" style="width: 200px;">
+        </kendo-dropdownlist>
+
+
+
+        <!-- <kendo-dropdownlist
+  [data]="searchFields"
+  [(ngModel)]="selectedField"
+  [defaultItem]="'Search All Fields'"
+  style="width: 160px;"
+></kendo-dropdownlist> -->
+
+        <input type="text" class="k-textbox" placeholder="Type Search Keyword" [(ngModel)]="searchKeyword"
+          (ngModelChange)="onSearchChange()" style="width: 200px;" />
+
+        <button kendoButton [themeColor]="'success'" [(ngModel)]="searchTerm">
+          <kendo-svg-icon [icon]="icons.searchIcon"></kendo-svg-icon>
+        </button>
+      </div>
+
+
+
+
+
+
+      <!-- Right Side: Buttons -->
+      <div class="d-flex flex-wrap gap-2 align-items-center">
+
+
+        <div class="custom-pill-toggle">
+          <span class="pill-option" [class.active]="!isNonIntl" (click)="isNonIntl = false">
+            Intl
+          </span>
+          <span class="pill-option" [class.active]="isNonIntl" (click)="isNonIntl = true">
+            Non-Intl
+          </span>
+        </div>
+
+        <button kendoButton [themeColor]="'success'" (click)="clearFilters()">
+          Clear Filters
+        </button>
+
+        <button kendoButton [themeColor]="'success'" (click)="bulkEdit()">
+          Bulk Edit
+        </button>
+
+        <button kendoButton [themeColor]="'success'" (click)="savePreferences()">
+          Save Preferences
+        </button>
+        <button class="btn border green-btn" kendoButton [themeColor]="'success'">
+          <kendo-svg-icon [icon]="icons.menuIcon"></kendo-svg-icon>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <kendo-excelexport [data]="products" fileName="Products.xlsx" #excelexport>
+      <kendo-excelexport-column field="FirstName" title="First Name" [width]="140"></kendo-excelexport-column>
+      <kendo-excelexport-column field="LastName" title="Last Name" [width]="140"></kendo-excelexport-column>
+      <kendo-excelexport-column field="ProductName" title="Product Name" [width]="180"></kendo-excelexport-column>
+      <kendo-excelexport-column field="UnitPrice" title="Price" [width]="100"></kendo-excelexport-column>
+      <kendo-excelexport-column field="Discontinued" title="Discontinued" [width]="130"></kendo-excelexport-column>
+      <kendo-excelexport-column field="UnitsInStock" title="Units In Stock" [width]="120"></kendo-excelexport-column>
+      <kendo-excelexport-column field="AssignedDate" title="Assigned Date" [width]="150"></kendo-excelexport-column>
+      <kendo-excelexport-column field="SalesRep" title="Sales Rep" [width]="150"></kendo-excelexport-column>
+      <kendo-excelexport-column field="Coordinator" title="Coordinator" [width]="150"></kendo-excelexport-column>
+      <kendo-excelexport-column field="SyncToMobile" title="Sync to Mobile" [width]="130"></kendo-excelexport-column>
+      <kendo-excelexport-column field="CreatedSource" title="Created Source" [width]="160"></kendo-excelexport-column>
+      <kendo-excelexport-column field="PrimaryEmail" title="Primary Email" [width]="200"></kendo-excelexport-column>
+      <kendo-excelexport-column field="PrimaryPhone" title="Primary Phone" [width]="160"></kendo-excelexport-column>
+      <kendo-excelexport-column field="LMPLLeadID" title="LMPL Lead ID" [width]="150"></kendo-excelexport-column>
+      <kendo-excelexport-column field="AppointmentType" title="Appointment Type"
+        [width]="170"></kendo-excelexport-column>
+      <kendo-excelexport-column field="BookingAgency" title="Booking Agency" [width]="170"></kendo-excelexport-column>
+    </kendo-excelexport>
+
+
 
 
 
     <div class="kendo-grid-wrapper">
+
+
+
+
+
+
+
+      <!-- [kendoGridBinding]="products" -->
       <form novalidate #myForm="ngForm">
-        <kendo-grid [kendoGridTemplateEditing]="createNewProduct" [kendoGridBinding]="products" [pageSize]="5"
-          [pageable]="true" [sortable]="true" [navigable]="true" scrollable="scrollable" [groupable]="false"
-          [reorderable]="true" [resizable]="true" [columnMenu]="{ filter: true }" (save)="onSaveHandler($event)"
-          (remove)="onRemoveHandler($event)">
+        <kendo-grid [kendoGridTemplateEditing]="createNewProduct" 
+        [kendoGridBinding]="filteredProducts" 
+        [pageSize]="6"
+          [pageable]="true"
+           [sortable]="true" 
+           [navigable]="true" 
+           scrollable="scrollable"
+            [groupable]="false"
+          [reorderable]="true" 
+          [resizable]="true" 
+          [columnMenu]="{ filter: true }" 
+          (save)="onSaveHandler($event)"
+          (remove)="onRemoveHandler($event)" 
+          #grid
+           [selectable]="{ checkboxOnly: true, mode: 'multiple' }"
+          [columnMenu]="{ filter: true }" #excelExport>
+
+
 
           <ng-template kendoGridToolbarTemplate>
-            <!-- Add new button -->
-            <button kendoGridAddCommand type="button">Add new</button>
 
-            <!-- Dropdown list for All Leads, Select, and Save Preferences -->
+
+            <button kendoGridAddCommand type="button" style="background-color: rgb(47, 155, 47); color: white;">Create
+              Lead</button>
+
 
           </ng-template>
 
@@ -34,17 +160,36 @@
 
 
 
-          <kendo-grid-column field="UserSettings" title="User Settings" [width]="180">
+          <kendo-grid-column field="UserSettings" title="User Settings" [width]="180" >
             <ng-template kendoGridCellTemplate let-dataItem="dataItem">
-              <kendo-dropdownbutton [data]="userSettingsData" themeColor="primary">
+              <!-- <kendo-dropdownbutton [data]="userSettingsData" themeColor="primary">
                 Actions
-              </kendo-dropdownbutton>
+              </kendo-dropdownbutton> -->
+              <kendo-dropdowntree kendoDropDownTreeExpandable [kendoDropDownTreeHierarchyBinding]="areaData"
+                placeholder="Actions" textField="text" valueField="id" childrenField="areas"
+                class="action-dropdown-btn">
+              </kendo-dropdowntree>
+
+            
+
+
+              
+
             </ng-template>
           </kendo-grid-column>
+          <!-- <kendo-grid-column field="UserSettings" title="User Settings" [width]="180">
+            <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+              <kendo-dropdownbutton [themeColor]="'primary'" (click)="toggleTreeView(dataItem)">
+                Actions
+                <kendo-treeview *ngIf="selectedItem === dataItem" [nodes]="userSettingsData" [textField]="'text'">
+                </kendo-treeview>
+              </kendo-dropdownbutton>
+            </ng-template>
+          </kendo-grid-column> -->
 
 
           <!-- Main columns with set widths -->
-          <kendo-grid-column field="FirstName" title="First Name" [width]="140">
+          <kendo-grid-column field="FirstName"  title="First Name" [width]="140">
             <ng-template kendoGridEditTemplate let-dataItem="dataItem">
               <input [(ngModel)]="dataItem.FirstName" name="FirstName" required />
             </ng-template>
@@ -159,6 +304,9 @@
             </ng-template>
           </kendo-grid-command-column>
 
+          <!-- <kendo-grid-excel [fileName]="'Products.xlsx'" [fetchData]="products" #excelExport></kendo-grid-excel> -->
+
+          <!-- <kendo-grid-excel fileName="Products.xlsx"></kendo-grid-excel> -->
         </kendo-grid>
       </form>
     </div>

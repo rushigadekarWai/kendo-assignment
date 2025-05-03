@@ -1,7 +1,40 @@
-<nav class="navbar navbar-expand-lg navbar-custom  border border-1 border-dark">
+<nav class="navbar navbar-expand-lg navbar-custom ">
   <div class="container-fluid">
-    <div class="collapse navbar-collapse justify-content-end">
+    <!-- Toggler for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarIcons"
+      aria-controls="navbarIcons" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarIcons">
+      
+      <!-- Close button (visible only on mobile) -->
+      <button
+        type="button"
+        class="btn-close btn-close-dark ms-auto d-lg-none mb-2 me-3 float-end"
+        aria-label="Close"
+        (click)="closeNavbar()">
+      </button>
+
       <ul class="navbar-nav align-items-center">
+        <li class="nav-item">
+          <label class="switch-container">
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="isDarkMode" (change)="toggleDarkMode()" />
+              <span class="slider round">
+                <span class="mode-text light-mode-text">Light Mode</span>
+                <span class="mode-text dark-mode-text">Dark Mode</span>
+              </span>
+            </label>
+          </label>
+        </li>
+        
+        
+        
+        
+        
+
         <li class="nav-item">
           <a class="nav-link" href="#">
             <div class="icon-container">
@@ -33,14 +66,14 @@
             </div>
           </a>
         </li>
-        <!-- Admin with avatar and label -->
+
+        <!-- Admin avatar and name -->
         <li class="nav-item">
           <a class="nav-link" href="#">
             <div class="icon-container d-flex align-items-center px-3">
               <img src="https://randomuser.me/api/portraits/men/32.jpg"
-     alt="Admin Avatar"
-     class="rounded-circle me-3 avatar-img" />
-
+                alt="Admin Avatar"
+                class="rounded-circle me-2 avatar-img" />
               <div class="d-flex flex-column text-white lh-sm">
                 <strong class="small">admin</strong>
                 <small>Admin</small>
@@ -52,51 +85,8 @@
     </div>
   </div>
 </nav>
+
 <!-- ROUTER OUTLET (Dynamic page content) -->
-<div class="content-wrapper border">
+<div class="content-wrapper container-fluid">
   <router-outlet></router-outlet>
 </div>
-
-<!-- 
-<div class="wrapper">
-  <kendo-tabstrip (tabSelect)="onTabSelect($event)">
-    <kendo-tabstrip-tab title="Paris" [selected]="true">
-      <ng-template kendoTabContent>
-        <div class="content">
-          <img src="assets/layout/tabstrip/rainy.png" />
-          <h2>17<span>ºC</span></h2>
-          <span>Rainy weather in Paris.</span>
-        </div>
-      </ng-template>
-    </kendo-tabstrip-tab>
-    <kendo-tabstrip-tab title="New York City">
-      <ng-template kendoTabContent>
-        <div class="content">
-          <img src="assets/layout/tabstrip/cloudy.png" />
-          <h2>19<span>ºC</span></h2>
-          <span>Cloudy weather in New York City.</span>
-        </div>
-      </ng-template>
-    </kendo-tabstrip-tab>
-    <kendo-tabstrip-tab title="Tallinn">
-      <ng-template kendoTabContent>
-        <div class="content">
-          <img src="assets/layout/tabstrip/sunny.png" />
-          <h2>23<span>ºC</span></h2>
-          <span>Sunny weather in Tallinn.</span>
-        </div>
-      </ng-template>
-    </kendo-tabstrip-tab>
-    <kendo-tabstrip-tab title="London">
-      <ng-template kendoTabContent>
-        <div class="content">
-          <img src="assets/layout/tabstrip/rainy.png" />
-          <h2>16<span>ºC</span></h2>
-          <span>Rainy weather in London.</span>
-        </div>
-      </ng-template>
-    </kendo-tabstrip-tab>
-  </kendo-tabstrip>
-</div> -->
-
-

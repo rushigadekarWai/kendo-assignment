@@ -15,6 +15,7 @@ import { AgentManagementComponent } from "../agent-management/agent-management.c
 import { ExcelModule, ExcelService, KENDO_GRID_EXCEL_EXPORT } from '@progress/kendo-angular-grid';
 import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 import { CalendarComponent } from "../calendar/calendar.component";
+import { ActivitiesComponent } from "../activities/activities.component";
 
 @Component({
   selector: 'app-tabstrips',
@@ -26,18 +27,16 @@ import { CalendarComponent } from "../calendar/calendar.component";
     KENDO_AVATAR,
     LayoutModule,
     IndicatorsModule,
-   
     KENDO_TABSTRIP,
-  
     KENDO_DROPDOWNBUTTON,
     KENDO_DROPDOWNLIST,
     DropDownsModule,
-
     WorkflowsComponent,
     LeadManagementComponent,
     TaskGridLayoutComponent,
     AgentManagementComponent, KENDO_GRID_EXCEL_EXPORT, ExcelModule, ExcelExportModule,
-    CalendarComponent
+    CalendarComponent,
+    ActivitiesComponent
 ],
 providers: [ExcelService],
   templateUrl: './tabstrips.component.html',
@@ -56,8 +55,14 @@ export class TabstripsComponent {
   }
 
   // Method to store the selected tab index in localStorage
+  // onTabSelect(event: any): void {
+  //   localStorage.setItem('selectedTabIndex', event.index.toString());
+  //   this.selectedTab = event.index;
+  // }
+
+  // selectedTab: number = 0;
+
   onTabSelect(event: any): void {
-    localStorage.setItem('selectedTabIndex', event.index.toString());
     this.selectedTab = event.index;
   }
 }

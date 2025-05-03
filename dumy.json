@@ -1,0 +1,126 @@
+{
+  "leads": [
+    {
+      "id": "a44f",
+      "FirstName": "John",
+      "LastName": "Doe",
+      "Email": "john.doe@example.com",
+      "Phone": "123-456-7890",
+      "StatusID": 2,
+      "AssignedTo": "Chris Green",
+      "LeadSource": "Web",
+      "CompanyName": "Unknown",
+      "CreatedDate": "2025-01-01T00:00:00Z",
+      "Notes": "No notes provided.",
+      "LeadScore": 0,
+      "IsQualified": true
+    },
+    {
+      "id": "7206",
+      "FirstName": "Jane",
+      "LastName": "Smith",
+      "Email": "jane.smith@example.com",
+      "Phone": "987-654-3210",
+      "StatusID": 2,
+      "AssignedTo": "Ashley Moore",
+      "LeadSource": "Referral",
+      "CompanyName": "Unknown",
+      "CreatedDate": "2025-01-01T00:00:00Z",
+      "Notes": "No notes provided.",
+      "LeadScore": 0,
+      "IsQualified": false
+    },
+    {
+      "id": "8baa",
+      "FirstName": "Michael",
+      "LastName": "Brown",
+      "Email": "michael.brown@example.com",
+      "Phone": "555-555-5555",
+      "StatusID": 3,
+      "AssignedTo": "Chris Green",
+      "LeadSource": "Email",
+      "CompanyName": "Initech",
+      "CreatedDate": "2025-02-01T00:00:00Z",
+      "Notes": "Requested product demo.",
+      "LeadScore": 91,
+      "IsQualified": true
+    },
+    {
+      "FirstName": "aa",
+      "LastName": "aa",
+      "Email": "aa",
+      "Phone": "1111",
+      "StatusID": 3,
+      "AssignedTo": "csa",
+      "LeadSource": "aca",
+      "id": "b215",
+      "CompanyName": "Unknown",
+      "CreatedDate": "2025-03-01T00:00:00Z",
+      "Notes": "Test data.",
+      "LeadScore": 20,
+      "IsQualified": false
+    },
+    {
+      "id": "fdbf",
+      "FirstName": "xv x",
+      "LastName": "sssf",
+      "Email": "ssvsv",
+      "Phone": "12345",
+      "StatusID": 4,
+      "AssignedTo": "ssda",
+      "LeadSource": "sasdsd",
+      "CompanyName": "Synthetix",
+      "CreatedDate": "2025-03-20T00:00:00Z",
+      "Notes": "Needs pricing details.",
+      "LeadScore": 60,
+      "IsQualified": false
+    },
+    {
+      "id": "f885",
+      "FirstName": "rushikejh",
+      "LastName": "jlanl",
+      "Email": "ddlad lj",
+      "Phone": "1111",
+      "StatusID": 4,
+      "AssignedTo": "jla",
+      "LeadSource": "la ",
+      "CompanyName": "wai",
+      "CreatedDate": "2025-04-22T06:46:05.673Z",
+      "Notes": "assingmene",
+      "LeadScore": "10",
+      "IsQualified": false
+    }
+  ],
+  "statuses": [
+    {
+      "StatusID": 1,
+      "StatusName": "New",
+      "id": "ddff"
+    },
+    {
+      "StatusID": 2,
+      "StatusName": "Contacted",
+      "id": "870e"
+    },
+    {
+      "StatusID": 3,
+      "StatusName": "Converted",
+      "id": "0c91"
+    },
+    {
+      "StatusID": 4,
+      "StatusName": "Qualified",
+      "id": "8d52"
+    },
+    {
+      "StatusID": 5,
+      "StatusName": "Disqualified",
+      "id": "9bfb"
+    },
+    {
+      "StatusID": 6,
+      "StatusName": "Selected",
+      "id": "9bfe"
+    }
+  ]
+}

@@ -54,3 +54,12 @@ export const products = [
     BookingAgency: 'Agency Z'
   }
 ];
+
+export const iconList = [
+  {
+    name: "Search Actions",
+    icons: [
+      { className: "k-i-zoom k-i-search" } // Combined class for search icon
+    ]
+  }
+];

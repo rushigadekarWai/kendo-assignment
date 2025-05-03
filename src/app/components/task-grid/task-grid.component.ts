@@ -1,14 +1,58 @@
-import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { KENDO_DROPDOWNBUTTON } from '@progress/kendo-angular-buttons';
-import { GridModule, KENDO_GRID } from '@progress/kendo-angular-grid';
-import { alignCenterIcon, alignJustifyIcon, alignLeftIcon, alignRightIcon, boldIcon, downloadIcon, filePdfIcon, italicIcon, SVGIcon, underlineIcon } from '@progress/kendo-svg-icons';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormControlName, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
+import { KENDO_BUTTON, KENDO_BUTTONGROUP, KENDO_BUTTONS, KENDO_DROPDOWNBUTTON } from '@progress/kendo-angular-buttons';
+import { KENDO_TOGGLEBUTTONTABSTOP, KendoInput } from '@progress/kendo-angular-common';
+import { DropDownListComponent, DropDownsModule, KENDO_DROPDOWNLIST } from '@progress/kendo-angular-dropdowns';
+import { ExcelExportComponent } from '@progress/kendo-angular-excel-export';
+import { CreateFormGroupArgs, EditEvent, GridModule, KENDO_GRID, RemoveEvent, SaveEvent } from '@progress/kendo-angular-grid';
+import { IconsModule, KENDO_ICONS, KENDO_SVGICON } from '@progress/kendo-angular-icons';
+import { IndicatorsModule } from '@progress/kendo-angular-indicators';
+import { KENDO_CHECKBOX, KENDO_INPUTS, KENDO_TEXTBOX } from '@progress/kendo-angular-inputs';
+import { KENDO_AVATAR, KENDO_GRIDLAYOUT, KENDO_TABSTRIP, LayoutModule } from '@progress/kendo-angular-layout';
+import { KENDO_APPBAR } from '@progress/kendo-angular-navigation';
+import { KENDO_TOOLBAR } from '@progress/kendo-angular-toolbar';
+// import { Product } from "./model";
+// import { products } from "./products";
+import { KENDO_DIALOG } from '@progress/kendo-angular-dialog';
+import { ProductService } from '../../calendar/product.service';
+import { Product } from '../../task-grid-layout/model';
 
 @Component({
   selector: 'app-task-grid',
   standalone: true,
-  imports: [GridModule,FormsModule, KENDO_GRID, KENDO_DROPDOWNBUTTON],
+  imports: [
+    DropDownsModule,
+   
+    ReactiveFormsModule,
+    IconsModule,
+    KENDO_AVATAR,
+    LayoutModule,
+    IndicatorsModule,
+
+    KENDO_TABSTRIP,
+  
+    KENDO_DROPDOWNBUTTON,
+    KENDO_DROPDOWNLIST,
+    DropDownsModule,
+   
+    KENDO_ICONS,
+    KENDO_BUTTON,
+    KENDO_BUTTONS,
+    KENDO_GRID,
+    KENDO_GRIDLAYOUT,
+    KENDO_DROPDOWNLIST,
+    KENDO_GRIDLAYOUT,
+    KENDO_BUTTONGROUP,
+    KENDO_INPUTS,
+    FormsModule,
+    KENDO_TOOLBAR,
+    KENDO_APPBAR,
+    KENDO_DROPDOWNBUTTON,
+    KENDO_TOGGLEBUTTONTABSTOP, DropDownsModule, KENDO_CHECKBOX, KENDO_TEXTBOX,KENDO_DIALOG, KENDO_DROPDOWNBUTTON, 
+    
+  ],
   templateUrl: './task-grid.component.html',
   styleUrl: './task-grid.component.css'
 })
@@ -16,108 +60,162 @@ export class TaskGridComponent {
 
   
   
-    searchKeyword: string = '';
-    
-    // Toggle for selecting between international and non-international
-    selectedToggle: 'nonIntl' | 'intl' = 'nonIntl';
-  
-    // Data for the grid
-    gridData: any[] = [
-      {
-        recordId: 1,
-        lastName: 'Smith',
-        firstName: 'John',
-        email: 'john.smith@example.com',
-        phone: '123-456-7890',
-        leadId: 'L001',
-        appointmentType: 'Consultation',
-        bookingAgency: 'Agency A'
-      },
-      {
-        recordId: 2,
-        lastName: 'Doe',
-        firstName: 'Jane',
-        email: 'jane.doe@example.com',
-        phone: '987-654-3210',
-        leadId: 'L002',
-        appointmentType: 'Follow-up',
-        bookingAgency: 'Agency B'
-      }
-      // More data items...
-    ];
-  
-    // Selected keys for multi-selection
-    selectedKeys: any[] = [];
-  
-    // Icons for export buttons and formatting actions
-    pdfSVG: SVGIcon = filePdfIcon;
-    excelSVG: SVGIcon = downloadIcon;
-    boldSVG: SVGIcon = boldIcon;
-    italicSVG: SVGIcon = italicIcon;
-    underlineSVG: SVGIcon = underlineIcon;
-    alignLeftSVG: SVGIcon = alignLeftIcon;
-    alignCenterSVG: SVGIcon = alignCenterIcon;
-    alignRightSVG: SVGIcon = alignRightIcon;
-    alignJustifySVG: SVGIcon = alignJustifyIcon;
-  
-    // Event handler for toggle change (intl/nonIntl)
-    onToggleChange(event: any): void {
-      this.selectedToggle = event.checked ? 'intl' : 'nonIntl';
-      console.log('Selected toggle:', this.selectedToggle);
-    }
-  
-    // Search method to handle search functionality
-    onSearch(): void {
-      console.log('Search keyword:', this.searchKeyword);
-      // Implement your actual search logic here
-    }
-  
-    // Export to Excel method
-    exportToExcel(): void {
-      console.log('Exporting to Excel...');
-      // Implement the actual Excel export functionality here
-    }
-  
-    // Method to trigger row editing (you can customize this)
-    editRow(dataItem: any) {
-      console.log('Editing row:', dataItem);
-      // Implement the actual editing logic here (e.g., show a modal or inline editing)
-    }
-  
-    // Method for performing actions on row (e.g., "Details" button)
-    performAction(dataItem: any) {
-      console.log('Performing action for:', dataItem);
-      // Implement action logic here
-    }
-  
-    // Handling cell click event (e.g., for editing)
-    onCellClick(event: any) {
-      console.log('Cell clicked:', event);
-      // Implement your cell click logic (e.g., toggle editing mode or show details)
-    }
-  
-    // Filter logic to search through grid data
-    onFilter(value: string) {
-      // Filter grid data based on search keyword
-      if (value) {
-        this.gridData = this.gridData.filter(item => 
-          item.firstName.toLowerCase().includes(value.toLowerCase()) || 
-          item.lastName.toLowerCase().includes(value.toLowerCase()) || 
-          item.email.toLowerCase().includes(value.toLowerCase())
-        );
-      } else {
-        // Reset grid data if search is cleared
-        this.gridData = [
-          { id: 1, firstName: 'Lead 1', lastName: 'Description for lead 1' },
-          { id: 2, firstName: 'Lead 2', lastName: 'Description for lead 2' }
-        ];
-      }
-    }
-  
-    // Toggle Board View (optional for view changes)
-    onBoardViewChange(event: any): void {
-      const isChecked = event.target.checked;
-      console.log('Board View toggled:', isChecked);
-      // Implement board view toggling logic here
-    }
+   
+   
+     // public products: unknown[] = products;
+     public products: any[] = []; // or Product[] if you have a model
+   
+   
+     // productsdata = [];
+   
+   ngOnInit(): void {
+     this.getProducts();
+   }
+   getProducts() {
+     this.productService.getProducts().subscribe(
+       (data) => {
+         console.log(data);  // This should log the response from the API
+         this.products = data;  // Make sure this line is not commented out
+       },
+       (error) => {
+         console.error('Error fetching products:', error);
+       }
+     );
+   }
+   
+     createNewProduct(): Product {
+      
+       return new Product();
+     }
+   
+     onSaveHandler({ dataItem, isNew }: { dataItem: any; isNew: boolean }): void {
+       if (isNew) {
+         // Create new product
+         this.productService.createProduct(dataItem).subscribe({
+           next: (response) => {
+             console.log('Product created:', response);
+             this.getProducts();  // Refresh the grid
+           },
+           error: (error) => {
+             console.error('Error creating product:', error);
+           }
+         });
+       } else {
+         // Update existing product
+         this.productService.updateProduct(dataItem).subscribe({
+           next: (response) => {
+             console.log('Product updated:', response);
+             this.getProducts();  // Refresh the grid
+           },
+           error: (error) => {
+             console.error('Error updating product:', error);
+           }
+         });
+       }
+     }
+     
+     onRemoveHandler(dataItem: any): void {
+       this.productService.removeProduct(dataItem.id).subscribe({
+         next: () => {
+           console.log('Product removed');
+           this.getProducts();  // Refresh the grid
+         },
+         error: (error) => {
+           console.error('Error removing product:', error);
+         }
+       });
+     }
+     
+   
+   
+   
+   
+   
+   
+   
+   
+     public listItems: Array<string> = [
+       "Baseball",
+       "Basketball",
+       "Cricket",
+       "Field Hockey",
+       "Football",
+       "Table Tennis",
+       "Tennis",
+       "Volleyball",
+     ];
+   
+     commandColumnStyles = {
+       'background-color': '#f4f4f4',
+       'padding': '10px',
+       'border': '1px solid #ddd',
+       'text-align': 'center'
+     };
+   // Example actions for the dropdown
+   userSettingsData = [
+     { text: 'Profile', value: 'profile' },
+     { text: 'Account Settings', value: 'account' },
+     { text: 'Logout', value: 'logout' }
+   ];
+   
+   // Add your logic for handling dropdown actions
+   onDropdownSelect(event: any) {
+     console.log('Selected option:', event.item);
+   }
+   
+   // Variable to track which dropdown is open
+   
+   // listItems = ['All leads', 'Select', 'Save Preferences'];
+   searchKeyword!: string;
+   // Handle the dropdown value change
+   onDropdownChange(event: any) {
+     console.log('Selected dropdown value:', event);
+     // Handle the dropdown value change logic here
+   }
+   
+   // Handle the search input
+   onSearchInput(event: any) {
+     const searchText = event.target.value;
+     console.log('Search text:', searchText);
+     // Implement your search logic here
+   }
+   
+   // Handle toggle view button
+   onToggleView() {
+     console.log('Toggled view');
+     // Implement toggle view logic (e.g., switch between grid and list view)
+   }
+   
+   // Handle clear filter button
+   onClearFilter() {
+     console.log('Filters cleared');
+     // Implement clear filter logic (reset filter state)
+   }
+   
+   // Handle bulk edit button
+   onBulkEdit() {
+     console.log('Bulk edit initiated');
+     // Implement bulk edit logic
+   }
+   
+   // Handle save preferences button
+   onSavePreferences() {
+     console.log('Preferences saved');
+     // Implement save preferences logic
+   }
+   
+   // Handle menu button click
+   onMenuClick() {
+     console.log('Menu clicked');
+     // Implement menu actions (could be opening a side menu, etc.)
+   }
+     
+   
+   
+   constructor(private productService: ProductService){
+   
+   }
+   
+   
+   
 }

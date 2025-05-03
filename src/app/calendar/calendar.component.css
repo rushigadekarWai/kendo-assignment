@@ -113,3 +113,323 @@ kendo-dropdownbutton {
     gap: 4px;
   }
 }
+
+.custom-pill-toggle {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #004080, #0059b3); /* Subtle gradient for depth */
+  border-radius: 999px;
+  padding: 0.2rem;
+  width: fit-content;
+  gap: 0.25rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.pill-option {
+  padding: 0.35rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #fff;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.pill-option:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.pill-option.active {
+  background-color: yellowgreen;
+  color: white;
+  box-shadow: 0 0 5px rgba(154, 205, 50, 0.6);
+}
+
+/* Dropdowns and Input Box */
+.toolbar-container kendo-dropdownlist,
+.toolbar-container input.k-textbox {
+  height: 38px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+/* Increase dropdown widths slightly */
+.toolbar-container kendo-dropdownlist {
+  min-width: 180px;
+}
+
+/* Search input */
+.toolbar-container input.k-textbox {
+  min-width: 220px;
+}
+
+/* Kendo Buttons */
+.toolbar-container button[kendoButton] {
+  height: 38px;
+  font-size: 13px;
+  border-radius: 4px;
+  padding: 0 12px;
+}
+
+/* SVG Icons inside buttons */
+.toolbar-container kendo-svg-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.green-btn {
+  background-color: #28a745 !important; /* Bootstrap success green */
+  color: white !important;
+  border: none !important;
+}
+
+.green-btn:hover {
+  background-color: #218838 !important;
+}
+
+
+/* Grid container tweaks */
+.kendo-grid-wrapper {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+kendo-grid .k-grid-header {
+  background-color: #2c3e50;
+  color: white;
+  font-weight: bold;
+}
+
+kendo-grid .k-header {
+  background-color: #2c3e50 !important;
+  color: #ffffff !important;
+  font-size: 14px;
+}
+
+/* Row highlight on hover */
+kendo-grid .k-grid-content tr:hover {
+  background-color: #e6f7ff;
+}
+
+/* Add button in toolbar */
+.k-grid-toolbar .k-button.k-grid-add-command {
+  background-color: #2f9b2f !important;
+  color: white !important;
+  border: none;
+}
+
+/* Action buttons - keep default sizes but update color */
+.button-container button {
+  margin-right: 4px;
+  color: white;
+  border: none;
+}
+
+.button-container button[kendoGridEditCommand] {
+  background-color: #3498db !important; /* Blue */
+}
+
+.button-container button[kendoGridRemoveCommand] {
+  background-color: #e74c3c !important; /* Red */
+}
+
+.button-container button[kendoGridSaveCommand] {
+  background-color: #27ae60 !important; /* Green */
+}
+
+.button-container button[kendoGridCancelCommand] {
+  background-color: #95a5a6 !important; /* Gray */
+}
+
+/* Checkbox column center alignment */
+kendo-grid-checkbox-column {
+  text-align: center;
+}
+
+/* Editable input fields inside grid */
+kendo-grid input[type="text"],
+kendo-grid input[type="number"],
+kendo-grid input[type="email"],
+kendo-grid input[type="tel"],
+kendo-grid input[type="date"],
+kendo-grid input[type="checkbox"] {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Dropdown button (User Settings column) */
+kendo-dropdownbutton {
+ 
+  color: white !important;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.ng::deep.k-grid .k-grid-header .k-filterable > .k-cell-inner .k-link{
+  background-color: #004080;
+}
+
+/* General header styling */
+.k-grid-header .k-header,
+.k-grid .k-grid-header th.k-header {
+  background: #003366; /* Deep blue background */
+  color: #ffffff;       /* White text */
+  font-weight: 600;
+  border-bottom: 2px solid #0055aa; /* Subtle bottom border */
+}
+
+/* Hover effect for column menu icon */
+.k-grid-header .k-grid-column-menu:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Light hover */
+  border-radius: 4px;
+}
+
+/* SVG icon style (vertical dots) */
+.k-svg-i-more-vertical {
+  fill: #ffffff; /* Icon color */
+  width: 18px;
+  height: 18px;
+  transition: fill 0.3s ease;
+}
+
+/* On hover, change icon color */
+.k-grid-header .k-grid-column-menu:hover .k-svg-i-more-vertical {
+  fill: #00ccff; /* Light blue on hover */
+}
+
+/* Column title styling */
+.k-column-title {
+  font-size: 14px;
+  text-transform: capitalize;
+  padding-right: 8px;
+}
+
+/* Keep alignment and spacing intact */
+.k-cell-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+  
+
+/* Apply to entire Kendo Grid */
+::ng-deep .k-grid {
+  background-color: #e6f7ff;
+  border: 1px solid #a0d8ef;
+  border-radius: 8px;
+  color: #003c57;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 121, 107, 0.1);
+  overflow: hidden;
+}
+
+/* Header row style */
+::ng-deep .k-grid-header {
+  background-color: #00796b;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Individual header cell */
+::ng-deep .k-grid-header .k-header {
+  background-color: #00796b;
+  color: #ffffff;
+  border-right: 1px solid #004d40;
+}
+
+/* Regular cell styling */
+::ng-deep .k-grid td {
+  background-color: #ffffff;
+  border-color: #cceeff;
+  color: #003c57;
+}
+
+/* Sticky cell in grid body */
+::ng-deep .k-grid td.k-sticky-cell {
+  background-color: #d0f0fd;
+  border-right: 1px solid #80deea;
+}
+
+/* Sticky cell in grid header */
+::ng-deep .k-grid th.k-sticky-cell {
+  background-color: #004d40 !important;
+  color: #ffffff !important;
+  border-right: 1px solid #00796b;
+}
+
+/* Alternate row background */
+::ng-deep .k-grid .k-alt {
+  background-color: #f1f8e9;
+}
+
+/* Hover effect on rows */
+::ng-deep .k-grid tr:hover {
+  background-color: #c8e6c9;
+  transition: background 0.3s ease;
+}
+
+/* Checkbox styling */
+::ng-deep .k-grid input[type="checkbox"] {
+  accent-color: #00796b;
+  transform: scale(1.3); /* Make checkbox larger */
+}
+
+/* Primary button (Edit) */
+::ng-deep .k-button.k-primary {
+  background-color: #00796b;
+  border-color: #004d40;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+::ng-deep .k-button.k-primary:hover {
+  background-color: #00574b;
+}
+
+::ng-deep .k-button.k-primary:focus {
+  box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.3);
+}
+
+/* Danger button (Delete) */
+::ng-deep .k-button.k-danger {
+  background-color: #d32f2f;
+  border-color: #b71c1c;
+  color: white;
+}
+
+::ng-deep .k-button.k-danger:hover {
+  background-color: #b71c1c;
+}
+
+::ng-deep .k-button.k-danger:focus {
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.3);
+}
+
+/* Dropdown button */
+::ng-deep .k-dropdown-button {
+  background-color: #00796b;
+  color: white;
+  border: 1px solid #004d40;
+  border-radius: 4px;
+}
+
+::ng-deep .k-dropdown-button:hover {
+  background-color: #00574b;
+  border-color: #003d33;
+}
+
+/* Dropdown menu item */
+::ng-deep .k-dropdown-item {
+  color: #003c57;
+}
+
+::ng-deep .k-dropdown-item:hover {
+  background-color: #c8e6c9;
+  color: #004d40;
+}

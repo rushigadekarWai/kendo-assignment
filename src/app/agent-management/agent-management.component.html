@@ -1,83 +1,87 @@
-
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <div>
-    <h5 class="k-text-info fw-bold m-0">Lead Management</h5>
-    <small class="k-text-info">Leads</small>
-  </div>
-  <div class="d-flex gap-2">
-    <button kendoButton  (click)="exportToExcel()">Export to Excel</button>
-    <!-- <button kendoGridExcelCommand>Export to Excel</button> -->
-    <button kendoButton (click)="onCreateLead()">Create Lead</button>
-  </div>
-</div>
-
-
-<kendo-grid [kendoGridBinding]="gridData" [kendoGridReactiveEditing]="createFormGroup" #grid
-  [sortable]="true"
-  [pageable]="true"
-  [reorderable]="true"
-  [resizable]="true"
-  [columnMenu]="{ filter: true }">
-
-  <!-- Grid Toolbar -->
+<kendo-grid [data]="leads" (edit)="editHandler($event)" (cancel)="cancelHandler($event)" (save)="saveHandler($event)"
+  (remove)="removeHandler($event)" (add)="addHandler($event)" [pageSize]="6" [pageable]="true" [sortable]="true"
+  [navigable]="true" scrollable="scrollable" [groupable]="false" [reorderable]="true" [resizable]="true"
+  [columnMenu]="{ filter: true }" [selectable]="{ checkboxOnly: true, mode: 'multiple' }">
   <ng-template kendoGridToolbarTemplate>
-    <button kendoGridAddCommand type="button">Add new</button>
+    <button kendoGridAddCommand>Add new</button>
   </ng-template>
 
-  <!-- Custom Actions Column with Dropdown -->
-  <kendo-grid-column title="Actions" [width]="150">
-    <ng-template kendoGridCellTemplate let-dataItem>
-      <kendo-dropdownbutton text="Actions" [data]="data" (itemClick)="onUserSettingClick($event)">
-        Actions
-      </kendo-dropdownbutton>
+
+  <kendo-grid-checkbox-column [width]="50" [columnMenu]="false" [ariaSort]="false
+    ">
+  </kendo-grid-checkbox-column>
+  <kendo-grid-column title="User Settings" [width]="180" [columnMenu]="false">
+    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+      <kendo-dropdowntree kendoDropDownTreeExpandable [kendoDropDownTreeHierarchyBinding]="areaData"
+        placeholder="Actions" textField="text" valueField="id" childrenField="areas"
+        class="action-dropdown-btn"></kendo-dropdowntree>
     </ng-template>
   </kendo-grid-column>
 
-  <!-- Core Columns -->
-  <!-- <kendo-grid-column field="ProductID" title="ID" [width]="100" [editable]="false"></kendo-grid-column> -->
-  <kendo-grid-column field="ProductName" title="Task" [width]="200"></kendo-grid-column>
-  <kendo-grid-column field="FirstName" title="First Name" [width]="150"></kendo-grid-column>
-  <kendo-grid-column field="LastName" title="Last Name" [width]="150"></kendo-grid-column>
-  <kendo-grid-column field="Category" title="Category" [width]="200"></kendo-grid-column>
-  <kendo-grid-column field="UnitPrice" title="Price" [width]="100"></kendo-grid-column>
-  <kendo-grid-column field="QuantityPerUnit" title="Quantity" [width]="180"></kendo-grid-column>
-  <kendo-grid-column field="UnitsInStock" title="Stock" [width]="100"></kendo-grid-column>
-  <kendo-grid-column field="UnitsOnOrder" title="Order"  [width]="100"></kendo-grid-column>
 
-  <!-- Additional CRM Fields -->
-  <kendo-grid-column field="SalesRep" title="Sales Rep" [width]="150"></kendo-grid-column>
-  <kendo-grid-column field="Coordinator" title="Coordinator" [width]="150"></kendo-grid-column>
-  <!-- <kendo-grid-column field="AssignedDate" title="Assigned Date" [width]="150"></kendo-grid-column> -->
-  <kendo-grid-column field="AssignedDate" title="Assigned Date" [width]="150">
+  <kendo-grid-column field="FirstName" title="First Name" [width]="140"></kendo-grid-column>
+  <kendo-grid-column field="LastName" title="Last Name" [width]="140"></kendo-grid-column>
+  <kendo-grid-column field="Email" title="Email" [width]="140"></kendo-grid-column>
+  <kendo-grid-column field="Phone" title="Phone" [width]="140"></kendo-grid-column>
+
+  <!-- Dropdown Column for Status -->
+  <kendo-grid-column field="StatusID" title="Status" [width]="140">
     <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
-      <kendo-datepicker
-        [formControl]="formGroup.get('AssignedDate')"
-        [format]="'yyyy-MM-dd'"
-        [placeholder]="'Select date'">
-      </kendo-datepicker>
+      <kendo-dropdownlist [data]="statuses" [valuePrimitive]="true" textField="StatusName" valueField="StatusID"
+        [formControl]="formGroup.get('StatusID')">
+      </kendo-dropdownlist>
+    </ng-template>
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{ statusName(dataItem.StatusID) }}
     </ng-template>
   </kendo-grid-column>
-  
-  
-  <kendo-grid-column field="CreatedSource" title="Source" [width]="150"></kendo-grid-column>
-  <kendo-grid-column field="PrimaryEmail" title="Email" [width]="200"></kendo-grid-column>
-  <kendo-grid-column field="PrimaryPhone" title="Phone" [width]="150"></kendo-grid-column>
-  <kendo-grid-column field="LMPLLeadID" title="Lead ID" [width]="100"></kendo-grid-column>
-  <kendo-grid-column field="AppointmentType" title="Type" [width]="150"></kendo-grid-column>
-  <kendo-grid-column field="BookingAgency" title="Agency" [width]="150"></kendo-grid-column>
 
-  <!-- Optional: Command Column for Edit/Save/Cancel -->
-  <kendo-grid-command-column title="Grid Actions" [width]="250" [sticky]="true"
-    [headerStyle]="commandColumnStyles" [style]="commandColumnStyles" [footerStyle]="commandColumnStyles">
-    <ng-template kendoGridCellTemplate let-isNew="isNew">
-      <button kendoGridEditCommand [primary]="true">Edit</button>
-      <button kendoGridRemoveCommand>Remove</button>
-      <button kendoGridSaveCommand [disabled]="formGroup.invalid || false">
-        {{ isNew ? 'Add' : 'Update' }}
-      </button>
-      <button kendoGridCancelCommand>
-        {{ isNew ? 'Discard' : 'Cancel' }}
-      </button>
+  <kendo-grid-column field="AssignedTo" title="Assigned To" [width]="140"></kendo-grid-column>
+  <kendo-grid-column field="LeadSource" title="Lead Source" [width]="140"></kendo-grid-column>
+
+  <!-- extra column -->
+  <kendo-grid-column field="CompanyName" title="Company" [width]="140"></kendo-grid-column>
+
+  <kendo-grid-column field="CreatedDate" title="Created Date" [width]="140">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{ dataItem.CreatedDate | date:'yyyy-MM-dd' }}
+
+    </ng-template>
+    <ng-template kendoGridEditTemplate let-formGroup="formGroup">
+      <kendo-datepicker [formControl]="formGroup.get('CreatedDate')"></kendo-datepicker>
+    </ng-template>
+  </kendo-grid-column>
+
+  <kendo-grid-column field="Notes" title="Notes" [width]="140" [sortable]="true"></kendo-grid-column>
+
+  <kendo-grid-column field="LeadScore" title="Lead Score" [width]="140">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <strong>{{ dataItem.LeadScore }}</strong>
+    </ng-template>
+  </kendo-grid-column>
+
+  <kendo-grid-column field="IsQualified" title="Qualified" [width]="140">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <input type="checkbox" [checked]="dataItem.IsQualified" disabled />
+    </ng-template>
+    <ng-template kendoGridEditTemplate let-formGroup="formGroup">
+      <input type="checkbox" [formControl]="formGroup.get('IsQualified')" />
+    </ng-template>
+  </kendo-grid-column>
+
+  <kendo-grid-command-column title="Actions" [width]="240" [sticky]="true" class="text-center" [columnMenu]="false">
+    <ng-template kendoGridCellTemplate let-isNew="isNew" >
+      <div class="action-buttons d-flex justify-content-center">
+        <button kendoGridEditCommand class="edit-btn" [primary]="true">Edit</button>
+        <button kendoGridRemoveCommand class="remove-btn">Remove</button>
+        <button kendoGridSaveCommand [disabled]="formGroup?.invalid ?? false" class="save-btn">
+          {{ isNew ? 'Add' : 'Update' }}
+        </button>
+        <button kendoGridCancelCommand class="cancel-btn">
+          {{ isNew ? 'Discard' : 'Cancel' }}
+        </button>
+      </div>
     </ng-template>
   </kendo-grid-command-column>
+  
 </kendo-grid>

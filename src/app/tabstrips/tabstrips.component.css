@@ -99,3 +99,48 @@
 ::ng-deep .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item.k-active{
   background-color: #218838;
 }
+
+
+/* Default layout: horizontal tabs */
+kendo-tabstrip {
+  display: block;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  kendo-tabstrip {
+    display: block;
+  }
+
+  kendo-tabstrip-tab {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  /* Stacked tab titles and content */
+  kendo-tabstrip-tab kendo-tab-title {
+    display: block;
+    text-align: center;
+  }
+
+  /* Hide tab content by default on small screens */
+  kendo-tabstrip-tab kendo-tab-content {
+    display: none;
+  }
+
+  /* Show the content for the selected tab */
+  kendo-tabstrip-tab[selected] kendo-tab-content {
+    display: block;
+  }
+}
+
+/* Optional: Adding scrollable tabs on mobile for better experience */
+@media (max-width: 600px) {
+  kendo-tabstrip {
+    overflow-x: auto;
+  }
+
+  kendo-tabstrip-tab {
+    white-space: nowrap;
+  }
+}

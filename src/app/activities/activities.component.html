@@ -1,1 +1,50 @@
-<p>activities works!</p>
+<kendo-grid [data]="view" [height]="500" >
+  <ng-template kendoGridToolbarTemplate>
+    <button kendoGridAddCommand>Add new</button>
+  </ng-template>
+
+  <kendo-grid-column field="FirstName" title="First Name">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="LastName" title="Last Name">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="Email" title="Email">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="Phone" title="Phone">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="CompanyName" title="Company">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="AssignedTo" title="Assigned To">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="LeadSource" title="Lead Source">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="LeadScore" title="Lead Score" editor="numeric">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="IsQualified" title="Qualified" editor="boolean">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="CreatedDate" title="Created Date">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{ dataItem.CreatedDate}}
+    </ng-template>
+  </kendo-grid-column>
+
+  <kendo-grid-column field="Notes" title="Notes">
+  </kendo-grid-column>
+
+  <kendo-grid-command-column title="Actions" [width]="180">
+    <ng-template kendoGridCellTemplate let-isNew="isNew">
+      <button kendoGridEditCommand>Edit</button>
+      <button kendoGridRemoveCommand>Remove</button>
+      <button kendoGridSaveCommand [primary]="true">Save</button>
+      <button kendoGridCancelCommand>Cancel</button>
+    </ng-template>
+  </kendo-grid-command-column>
+</kendo-grid>

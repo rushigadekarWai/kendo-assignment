@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { ViewChild } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -6,8 +6,8 @@ import { RouterOutlet } from '@angular/router';
 import { KENDO_BUTTON, KENDO_BUTTONGROUP, KENDO_BUTTONS, KENDO_DROPDOWNBUTTON } from '@progress/kendo-angular-buttons';
 import { KENDO_TOGGLEBUTTONTABSTOP, KendoInput } from '@progress/kendo-angular-common';
 import { DropDownListComponent, DropDownsModule, KENDO_DROPDOWNLIST } from '@progress/kendo-angular-dropdowns';
-import { ExcelExportComponent } from '@progress/kendo-angular-excel-export';
-import { CreateFormGroupArgs, EditEvent, KENDO_GRID, RemoveEvent, SaveEvent } from '@progress/kendo-angular-grid';
+import { ExcelExportComponent, ExcelExportData, KENDO_EXCELEXPORT } from '@progress/kendo-angular-excel-export';
+import { CreateFormGroupArgs, EditEvent, GridComponent, KENDO_GRID, KENDO_GRID_EXCEL_EXPORT, RemoveEvent, SaveEvent, TemplateEditingDirective } from '@progress/kendo-angular-grid';
 import { IconsModule, KENDO_ICONS, KENDO_SVGICON } from '@progress/kendo-angular-icons';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { KENDO_CHECKBOX, KENDO_INPUTS, KENDO_TEXTBOX } from '@progress/kendo-angular-inputs';
@@ -18,6 +18,8 @@ import { Product } from "./model";
 import { products } from "./products";
 import { KENDO_DIALOG } from '@progress/kendo-angular-dialog';
 import { ProductService } from './product.service';
+import { menuIcon, paperclipIcon, searchIcon } from '@progress/kendo-svg-icons';
+import { KENDO_TREEVIEW } from '@progress/kendo-angular-treeview';
 
 @Component({
   selector: 'app-calendar',
@@ -31,11 +33,11 @@ import { ProductService } from './product.service';
     IndicatorsModule,
 
     KENDO_TABSTRIP,
-  
     KENDO_DROPDOWNBUTTON,
     KENDO_DROPDOWNLIST,
     DropDownsModule,
-   
+    KENDO_DROPDOWNBUTTON,
+   TemplateEditingDirective,
     KENDO_ICONS,
     KENDO_BUTTON,
     KENDO_BUTTONS,
@@ -49,7 +51,7 @@ import { ProductService } from './product.service';
     KENDO_TOOLBAR,
     KENDO_APPBAR,
     KENDO_DROPDOWNBUTTON,
-    KENDO_TOGGLEBUTTONTABSTOP, DropDownsModule, KENDO_CHECKBOX, KENDO_TEXTBOX,KENDO_DIALOG, KENDO_DROPDOWNBUTTON, 
+    KENDO_TOGGLEBUTTONTABSTOP, DropDownsModule, KENDO_CHECKBOX, KENDO_TEXTBOX,KENDO_DIALOG, KENDO_DROPDOWNBUTTON, KENDO_GRID_EXCEL_EXPORT , KENDO_EXCELEXPORT, KENDO_ICONS, NgIf, KENDO_TREEVIEW, ReactiveFormsModule
     
   ],
   templateUrl: './calendar.component.html',
@@ -60,9 +62,42 @@ export class CalendarComponent {
 
   // public products: unknown[] = products;
   public products: any[] = []; // or Product[] if you have a model
+  isNonIntl = false;
+  // public gridData: any[] = []; 
+  public filteredProducts: any[] = [];
+  public selectedField: string = 'FirstName';     // Data shown in grid (filtered)
+   // Bound to input box
+   public searchKeyword: string = '';
 
 
-  // productsdata = [];
+   onSearchChange(): void {
+    const keyword = this.searchKeyword.trim().toLowerCase();
+  
+    if (!keyword) {
+      // If search is empty, show all
+      this.filteredProducts = [...this.products];
+      return;
+    }
+  
+    this.filteredProducts = this.products.filter(item =>
+      item.FirstName?.toLowerCase().includes(keyword) ||
+      item.LastName?.toLowerCase().includes(keyword) ||
+      item.ProductName?.toLowerCase().includes(keyword) ||
+      item.PrimaryEmail?.toLowerCase().includes(keyword) ||
+      item.PrimaryPhone?.toLowerCase().includes(keyword) ||
+      item.AppointmentType?.toLowerCase().includes(keyword) ||
+      item.SalesRep?.toLowerCase().includes(keyword) ||
+      item.BookingAgency?.toLowerCase().includes(keyword)
+    );
+  }
+
+
+
+
+
+
+
+
 
 ngOnInit(): void {
   this.getProducts();
@@ -71,7 +106,9 @@ getProducts() {
   this.productService.getProducts().subscribe(
     (data) => {
       console.log(data);  // This should log the response from the API
-      this.products = data;  // Make sure this line is not commented out
+      this.products = data; 
+      this.filteredProducts = [...data];
+       // Make sure this line is not commented out
     },
     (error) => {
       console.error('Error fetching products:', error);
@@ -83,6 +120,61 @@ getProducts() {
    
     return new Product();
   }
+
+
+  public searchTerm: string = '';
+// public selectedField: string = '';
+ // customize as per your model
+
+//  onSearch(): void {
+//     const term = this.searchTerm.toLowerCase();
+
+//     this.products = this.products.filter(product =>
+//       Object.values(product).some(val =>
+//         String(val).toLowerCase().includes(term)
+//       )
+//     );
+//   }
+// onSearch(): void {
+//   const term = this.searchTerm.trim().toLowerCase();
+
+//   if (!term) {
+//     this.filteredProducts = [...this.products]; // Show all when search is cleared
+//     return;
+//   }
+
+//   this.filteredProducts = this.products.filter(product =>
+//     product[this.selectedField]?.toLowerCase().includes(term)
+//   );
+// }
+
+// onSearch(): void {
+//   const term = this.searchTerm.toLowerCase();
+
+//   this.products = this.products.filter(product => {
+//     if (this.selectedField && this.selectedField !== 'Search All Fields') {
+//       // Filter by specific field
+//       const fieldValue = product[this.selectedField];
+//       return fieldValue?.toString().toLowerCase().includes(term);
+//     } else {
+//       // Search all fields
+//       return Object.values(product).some(val =>
+//         val?.toString().toLowerCase().includes(term)
+//       );
+//     }
+//   });
+// }
+
+
+  // public selectedItems: any[] = [];
+  // public selectedItems: any[] = [];
+
+// onSelectionChange(event: any): void {
+//   this.selectedItems = event.selectedRows.map((row:any) => row.dataItem);
+//   console.log('Selected rows:', this.selectedItems);
+// }
+
+
 
   onSaveHandler({ dataItem, isNew }: { dataItem: any; isNew: boolean }): void {
     if (isNew) {
@@ -162,7 +254,7 @@ onDropdownSelect(event: any) {
 // Variable to track which dropdown is open
 
 // listItems = ['All leads', 'Select', 'Save Preferences'];
-searchKeyword!: string;
+// searchKeyword!: string;
 // Handle the dropdown value change
 onDropdownChange(event: any) {
   console.log('Selected dropdown value:', event);
@@ -211,6 +303,113 @@ onMenuClick() {
 constructor(private productService: ProductService){
 
 }
+
+
+leadOptions: string[] = ['All Leads', 'New Leads', 'Contacted', 'Qualified'];
+  selectedLead: string = 'All Leads';
+
+  savedPreferences: string[] = ['Last Used', 'My Filters', 'Top Rated'];
+  selectedPreference: string = 'Select Saved Preferences';
+
+  // Search Keyword
+  // searchTerm: string = '';
+
+  // Intl Toggle
+  selectedIntl: 'non-intl' | 'intl' = 'non-intl';
+
+  
+
+  // Search Click Handler
+  // onSearch(): void {
+  //   console.log('Search Term:', this.searchTerm);
+  //   console.log('Lead Filter:', this.selectedLead);
+  //   console.log('Saved Preference:', this.selectedPreference);
+  //   console.log('International Filter:', this.selectedIntl);
+
+  //   // Call your API or apply filter logic here
+  // }
+
+  // Clear Filters
+  clearFilters(): void {
+    this.selectedLead = 'All Leads';
+    this.selectedPreference = 'Select Saved Preferences';
+    this.searchTerm = '';
+    this.selectedIntl = 'non-intl';
+
+    console.log('Filters cleared');
+    // Apply filter reset logic here
+  }
+
+  // Bulk Edit
+  bulkEdit(): void {
+    console.log('Bulk edit triggered');
+    // Open bulk edit modal or perform bulk actions
+  }
+
+  // Save Preferences
+  savePreferences(): void {
+    console.log('Saving preferences...');
+    // Save current selections to backend or localStorage
+  }
+
+  // Handle toggle change (Optional)
+  onIntlToggle(type: 'non-intl' | 'intl'): void {
+    this.selectedIntl = type;
+    console.log('Selected Toggle:', type);
+  }
+
+
+
+  @ViewChild(ExcelExportComponent) excelexport!: ExcelExportComponent;
+  @ViewChild(GridComponent) grid: GridComponent | undefined;
+ 
+
+  exportToExcel() {
+    this.excelexport.save();  // Trigger export to Excel
+  }
+  // Optional: Customize the Excel export data if needed
+  exportExcelData(e: ExcelExportData) {
+  console.log(e);  // Log the data being exported
+  // You can modify e here if needed
+}
+
+public icons = { paperclip: paperclipIcon,
+  searchIcon: searchIcon,
+  menuIcon: menuIcon
+
+ };
+
+
+ selectedItem: any = null;
+
+ // Example data for the Treeview
+ 
+//  
+ public areaData:any[] = [
+  {
+    text: "View Edits",
+    id: 1,
+    areas: [
+      { text: "Edit", id: 4 },
+      { text: "Delete", id: 3 },
+                                                      
+    ],
+  },
+  {
+    text: "View Leads",
+    id: 6,
+    areas: [
+      { text: "Details", id: 7 },
+      { text: "Projects", id: 10 },
+      
+    ],
+  },
+];
+onEdit(item: any): void {
+  console.log('Clicked Edit for:', item);
+  // Add logic here for modal or form navigation
+}
+rowIndexToEdit: number | null = null;
 
 
 

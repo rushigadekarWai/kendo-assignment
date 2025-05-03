@@ -1,91 +1,269 @@
-::ng-deep .k-grid {
-  background-color: #e6f7ff;
-  border: 1px solid #a0d8ef;
+
+
+/* Form inputs */
+::ng-deep .k-grid input[type="text"],
+::ng-deep .k-grid textarea,
+::ng-deep .k-grid select,
+::ng-deep .k-grid input[type="checkbox"] {
   border-radius: 8px;
-  color: #003c57;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 10px rgba(0, 121, 107, 0.1);
-  overflow: hidden;
+  border: 1px solid #ccc;
+
+  padding: 4px 8px;
+}
+/* ===============================
+   KENDO GRID OVERALL STYLING
+   =============================== */
+   ::ng-deep .k-grid {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow-x: auto;
+    background-color: #ffffff;
+  }
+  
+  /* ===============================
+     COLUMN HEADERS – DARK BLUE
+     =============================== */
+  ::ng-deep .k-grid-header th.k-header {
+    background-color: #3c93ea; /* Dark blue */
+    color: white;
+    font-weight: 600;
+    border-bottom: 2px solid #002244;
+  }
+  
+  /* ===============================
+     ROW HOVER
+     =============================== */
+  ::ng-deep .k-grid tbody tr:hover {
+    background-color: #f1f3f5;
+    cursor: pointer;
+  }
+  
+  /* ===============================
+     TOOLBAR "ADD" BUTTON
+     =============================== */
+  ::ng-deep .k-grid-toolbar .k-button {
+    background-color: #28a745; /* Green */
+    color: white;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  ::ng-deep .k-grid-toolbar .k-button:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* ===============================
+     ACTION BUTTON STYLES (COMMAND COLUMN)
+     =============================== */
+  ::ng-deep .action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  
+  ::ng-deep .edit-btn {
+    background-color: #28a745;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+  }
+  
+  ::ng-deep .edit-btn:hover {
+    background-color: #218838;
+  }
+  
+  ::ng-deep .remove-btn {
+    background-color: #dc3545;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+  }
+  
+  ::ng-deep .remove-btn:hover {
+    background-color: #c82333;
+  }
+  
+  ::ng-deep .save-btn {
+    background-color: #17a2b8;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+  }
+  
+  ::ng-deep .save-btn:hover {
+    background-color: #138496;
+  }
+  
+  ::ng-deep .cancel-btn {
+    background-color: #6c757d;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+  }
+  
+  ::ng-deep .cancel-btn:hover {
+    background-color: #5a6268;
+  }
+  
+  /* ===============================
+     NEUMORPHIC FORM INPUTS
+     =============================== */
+  ::ng-deep .k-grid input[type="text"],
+  ::ng-deep .k-grid textarea,
+  ::ng-deep .k-grid select {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: inset 2px 2px 5px #d1d9e6, inset -5px -5px 10px #ffffff;
+    padding: 4px 8px;
+    background-color: #ffffff;
+  }
+  
+  /* ===============================
+     DATEPICKER INPUT STYLING
+     =============================== */
+  ::ng-deep .k-datepicker .k-input {
+    background-color: #ffffff;
+    border-radius: 6px;
+  }
+  
+  /* ===============================
+     DROPDOWN MENU (POPUP) STYLING
+     =============================== */
+  ::ng-deep .k-popup.k-list-container {
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 4px 0;
+  }
+  
+  /* ===============================
+     EMPHASIZED TEXT IN CELLS
+     =============================== */
+  ::ng-deep .k-grid td strong {
+    color: #007bff;
+  }
+  
+  .k-column-title{
+    text-align: center;
+  }
+
+/* Targeting the column header specifically by title */
+/* Targeting the header based on the column title */
+::ng-deep .k-grid .k-grid-header th.k-header[title="Actions"] {
+  background-color: #3e90e2;  /* Dark blue background */
+  color: white;               /* White text color */
+  font-weight: 600;           /* Bold text */
+  border-bottom: 2px solid #002244;  /* Dark border at the bottom */
+  text-align: center;         /* Center the header text */
+  padding: 12px 0;            /* Padding for spacing */
+  font-size: 16px;            /* Larger font size */
 }
 
-::ng-deep .k-grid-header {
-  background-color: #00796b;
-  color: #ffffff;
-  font-weight: 600;
+/* Targeting the last column header (assuming "Actions" is the last column) */
+::ng-deep .k-grid .k-grid-header th.k-header:last-child {
+  display: flex;
+  justify-content: center;
+  background-color: #3c93ea;  /* Dark blue background */
+  color: white;               /* White text color */
+           /* Bold text */
+  border-bottom: 2px solid #002244;  /* Dark border at the bottom */
+  text-align: center;         /* Center the header text */
+            /* Larger font size */
 }
 
-::ng-deep .k-grid-header .k-header {
-  background-color: #00796b;
-  color: #ffffff;
-  border-right: 1px solid #004d40;
+.k-grid .k-grid-md .k-grid-header .k-grid-filter, .k-grid .k-grid-md .k-grid-header .k-header-column-menu, .k-grid .k-grid-md .k-grid-header .k-grid-header-menu, .k-grid-md .k-grid-header .k-grid-filter, .k-grid-md .k-grid-header .k-header-column-menu, .k-grid-md .k-grid-header .k-grid-header-menu  {
+background-color: #08437d ;
+color: #fff;
 }
 
-::ng-deep .k-grid td {
-  background-color: #ffffff;
-  border-color: #cceeff;
-  color: #003c57;
+/* Custom checkbox styling for Kendo Grid */
+::ng-deep .k-grid input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 2px solid #007bff; /* Border color */
+  border-radius: 4px;
+  background-color: #fff;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  vertical-align: middle; /* Align checkbox with text */
 }
 
-::ng-deep .k-grid td.k-sticky-cell {
-  background-color: #d0f0fd;
-  border-right: 1px solid #80deea;
-}
+/* Style when checkbox is checked */
 
-::ng-deep .k-grid th.k-sticky-cell {
-  background-color: #004d40 !important;
-  color: #ffffff !important;
-  border-right: 1px solid #00796b;
-}
-
-::ng-deep .k-grid .k-alt {
-  background-color: #f1f8e9;
-}
-
-::ng-deep .k-grid tr:hover {
-  background-color: #c8e6c9;
-  transition: background 0.3s ease; /* Slightly longer transition for smoother effect */
-}
+/* Style when checkbox is unchecked */
 
 ::ng-deep .k-grid input[type="checkbox"] {
-  accent-color: #00796b;
-  transform: scale(1.3); /* Slightly larger checkboxes for better visibility */
-}
-
-::ng-deep .k-button.k-primary {
-  background-color: #00796b;
-  border-color: #004d40;
-  color: white;
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-}
-
-::ng-deep .k-button.k-primary:hover {
-  background-color: #00574b;
-}
-
-::ng-deep .k-button.k-primary:focus {
-  box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.3); /* Added focus effect for better accessibility */
-}
-
-/* Style for the Dropdown Button in Grid */
-::ng-deep .k-dropdown-button {
-  background-color: #00796b;
-  color: white;
-  border: 1px solid #004d40;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid #007bff;
   border-radius: 4px;
+  background-color: #fff;
+  position: relative;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  /* Center tick using flexbox */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-::ng-deep .k-dropdown-button:hover {
-  background-color: #00574b;
-  border-color: #003d33;
+/* Checked State */
+::ng-deep .k-grid input[type="checkbox"]:checked {
+  background-color: #28a745;
+  border-color: #28a745;
 }
 
-/* Styling for Dropdown Items */
-::ng-deep .k-dropdown-item {
-  color: #003c57;
+/* Tick Mark */
+::ng-deep .k-grid input[type="checkbox"]:checked::after {
+  content: '✔';
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  position: static; /* No need for absolute now */
 }
 
-::ng-deep .k-dropdown-item:hover {
-  background-color: #c8e6c9;
-  color: #004d40;
+/* Disabled State */
+::ng-deep .k-grid input[type="checkbox"]:disabled {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  cursor: not-allowed;
 }
+
+/* Tick for disabled + checked */
+::ng-deep .k-grid input[type="checkbox"]:checked:disabled::after {
+  color: #6c757d; /* Gray tick if disabled */
+}
+
+
+
+
+/* Style for the Edit Mode Checkbox */
+::ng-deep .k-grid .k-grid-editing input[type="checkbox"] {
+  margin-top: 5px; /* Adjust the top margin for better alignment in editing mode */
+  cursor: pointer; /* Ensure the cursor is a pointer for editable checkboxes */
+}
+
 

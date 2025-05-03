@@ -6,10 +6,12 @@ import { Layout } from '@progress/kendo-drawing';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { NgClass, NgFor } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import bootstrap from '../../main.server';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-layout',
-  imports: [KENDO_APPBAR, KENDO_SVGICON, IconsModule, KENDO_AVATAR, LayoutModule, IndicatorsModule,KENDO_TABSTRIP,RouterOutlet],
+  imports: [KENDO_APPBAR, KENDO_SVGICON, IconsModule, KENDO_AVATAR, LayoutModule, IndicatorsModule,KENDO_TABSTRIP,RouterOutlet, FormsModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
@@ -32,6 +34,32 @@ export class LayoutComponent {
   }
   public onTabSelect(e: SelectEvent): void {
     console.log(e);
+  }
+
+  private navbarCollapse: any;
+
+  ngAfterViewInit() {
+  
+  }
+
+  closeNavbar() {
+    const navbarElement = document.getElementById('navbarIcons');
+    if (navbarElement) {
+      // Manually remove the 'show' class to close the navbar
+      navbarElement.classList.remove('show');
+    }
+  }
+
+  isDarkMode: boolean = false;
+
+  // Method to handle the dark mode toggle
+  toggleDarkMode() {
+    // You can add any logic to change the theme, e.g., applying a class to the body
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
   }
  
 }
