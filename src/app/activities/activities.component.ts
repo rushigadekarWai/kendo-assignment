@@ -1,7 +1,7 @@
 import { Component, HostListener, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CellClickEvent, GridComponent, KENDO_GRID } from '@progress/kendo-angular-grid';
-import { KENDO_INPUTS } from '@progress/kendo-angular-inputs';
+import { KENDO_INPUTS, KENDO_TEXTBOX } from '@progress/kendo-angular-inputs';
 import { KENDO_APPBAR } from '@progress/kendo-angular-navigation';
 import { Lead, LeadsService } from './leads.service';
 import { Subscription } from 'rxjs';
@@ -44,7 +44,7 @@ const matches = (el: any, selector: any) =>
 
 @Component({
   selector: 'app-activities',
-  imports: [KENDO_GRID, KENDO_INPUTS, KENDO_APPBAR, ReactiveFormsModule, FormsModule, NgIf],
+  imports: [KENDO_GRID, KENDO_INPUTS, KENDO_APPBAR, ReactiveFormsModule, FormsModule, NgIf, KENDO_TEXTBOX],
   templateUrl: './activities.component.html',
   styleUrl: './activities.component.css'
 })
@@ -57,7 +57,9 @@ export class ActivitiesComponent {
   private editedRowIndex: number | null = null; 
 
   private docClickSubscription: Subscription = new Subscription();
-  public formGroup:any = FormGroup;
+  // public formGroup:any = FormGroup;
+  public formGroup: FormGroup<any> | null = null;
+
   // public formGroup: FormGroup<any> | null = null;
 
 
@@ -117,7 +119,7 @@ export class ActivitiesComponent {
     } else {
       console.warn("Form invalid", this.formGroup?.errors);
     }
-    console.log("Saving lead:", this.formGroup.value);  // 👈 Should now show `id`
+    // console.log("Saving lead:", this.formGroup.value);  // 👈 Should now show `id`
 
   }
 
@@ -154,7 +156,7 @@ export class ActivitiesComponent {
     this.isNew = false;
     this.editedRowIndex = null;
     // this.isInEditingMode = false;
-    this.formGroup = undefined;
+    this.formGroup = null;
   }
 
   private onDocumentClick(e: any): void {
@@ -193,5 +195,14 @@ export class ActivitiesComponent {
       });
       
     }
+  }
+
+
+
+
+  public onFilter(inputValue: string): void {
+    
+
+    // this.dataBinding.skip = 0;
   }
 }

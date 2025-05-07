@@ -23,17 +23,16 @@
   }
 </ng-template> -->
 <ng-template kendoGridToolbarTemplate>
-  <!-- Show "Add New" button only if not in editing/adding mode -->
   <button *ngIf="!formGroup" kendoGridAddCommand>Add new</button>
 
-  <!-- Show "Save" and "Cancel" buttons only if in edit or add mode -->
-  <div *ngIf="formGroup && isNew !== true">
-    <button kendoButton [disabled]="!formGroup.valid" (click)="saveRow()">
-      Save
-    </button>
+  <div *ngIf="formGroup">
+    <button kendoButton [disabled]="!formGroup.valid" (click)="saveRow()">Save</button>
     <button kendoButton themeColor="primary" (click)="cancelHandler()">Cancel</button>
   </div>
+
+  
 </ng-template>
+
 
 
   <kendo-grid-column field="FirstName" title="First Name"></kendo-grid-column>
