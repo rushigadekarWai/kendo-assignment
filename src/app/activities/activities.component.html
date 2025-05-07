@@ -1,50 +1,76 @@
-<kendo-grid [data]="view" [height]="500" >
-  <ng-template kendoGridToolbarTemplate>
-    <button kendoGridAddCommand>Add new</button>
-  </ng-template>
+<kendo-grid
 
-  <kendo-grid-column field="FirstName" title="First Name">
-  </kendo-grid-column>
+  [data]="view"
+  #productsGrid
+  id="productsGrid"
+      (cellClick)="cellClickHandler($event)"
+      (add)="addHandler()"
+  [height]="500"
+  
+>
+<!-- <ng-template kendoGridToolbarTemplate>
+  @if (!formGroup) {
+  <button kendoGridAddCommand>Add new</button>
+  } @if (formGroup) {
+  <div>
+    <button kendoButton [disabled]="!formGroup.valid" (click)="saveRow()">
+      Save
+    </button>
+    <button kendoButton themeColor="primary" (click)="cancelHandler()">
+      Cancel
+    </button>
+  </div>
+  }
+</ng-template> -->
+<ng-template kendoGridToolbarTemplate>
+  <!-- Show "Add New" button only if not in editing/adding mode -->
+  <button *ngIf="!formGroup" kendoGridAddCommand>Add new</button>
 
-  <kendo-grid-column field="LastName" title="Last Name">
-  </kendo-grid-column>
+  <!-- Show "Save" and "Cancel" buttons only if in edit or add mode -->
+  <div *ngIf="formGroup && isNew !== true">
+    <button kendoButton [disabled]="!formGroup.valid" (click)="saveRow()">
+      Save
+    </button>
+    <button kendoButton themeColor="primary" (click)="cancelHandler()">Cancel</button>
+  </div>
+</ng-template>
 
-  <kendo-grid-column field="Email" title="Email">
-  </kendo-grid-column>
 
-  <kendo-grid-column field="Phone" title="Phone">
-  </kendo-grid-column>
-
-  <kendo-grid-column field="CompanyName" title="Company">
-  </kendo-grid-column>
-
-  <kendo-grid-column field="AssignedTo" title="Assigned To">
-  </kendo-grid-column>
-
-  <kendo-grid-column field="LeadSource" title="Lead Source">
-  </kendo-grid-column>
-
-  <kendo-grid-column field="LeadScore" title="Lead Score" editor="numeric">
-  </kendo-grid-column>
-
-  <kendo-grid-column field="IsQualified" title="Qualified" editor="boolean">
-  </kendo-grid-column>
-
-  <kendo-grid-column field="CreatedDate" title="Created Date">
-    <ng-template kendoGridCellTemplate let-dataItem>
-      {{ dataItem.CreatedDate}}
+  <kendo-grid-column field="FirstName" title="First Name"></kendo-grid-column>
+  <kendo-grid-column field="LastName" title="Last Name"></kendo-grid-column>
+  <kendo-grid-column field="Email" title="Email"></kendo-grid-column>
+  <kendo-grid-column field="Phone" title="Phone"></kendo-grid-column>
+  <kendo-grid-column field="CompanyName" title="Company"></kendo-grid-column>
+  <kendo-grid-column field="LeadSource" title="Source"></kendo-grid-column>
+  <kendo-grid-column
+    field="AssignedTo"
+    title="Assigned To"
+  ></kendo-grid-column>
+  <!-- <kendo-grid-column
+    field="StatusID"
+    editor="numeric"
+    title="Status ID"
+  ></kendo-grid-column> -->
+  <kendo-grid-column
+    field="LeadScore"
+    editor="numeric"
+    title="Lead Score"
+  ></kendo-grid-column>
+  <kendo-grid-column
+    field="IsQualified"
+    editor="boolean"
+    title="Qualified"
+  ></kendo-grid-column>
+  <kendo-grid-column field="CreatedDate" title="Created" format="{0:yyyy-MM-dd}">
+    <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
+      <!-- Simple HTML Date Input for editing without pipe -->
+      <input
+        type="date"
+        [formControl]="formGroup.get('CreatedDate')"
+      />
     </ng-template>
   </kendo-grid-column>
-
-  <kendo-grid-column field="Notes" title="Notes">
-  </kendo-grid-column>
-
-  <kendo-grid-command-column title="Actions" [width]="180">
-    <ng-template kendoGridCellTemplate let-isNew="isNew">
-      <button kendoGridEditCommand>Edit</button>
-      <button kendoGridRemoveCommand>Remove</button>
-      <button kendoGridSaveCommand [primary]="true">Save</button>
-      <button kendoGridCancelCommand>Cancel</button>
-    </ng-template>
-  </kendo-grid-command-column>
+  
+  
+  
 </kendo-grid>
