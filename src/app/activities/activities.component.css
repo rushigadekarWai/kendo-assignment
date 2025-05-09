@@ -1,0 +1,250 @@
+
+.custom-pill-toggle {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #004080, #0059b3); /* Subtle gradient for depth */
+  border-radius: 999px;
+  padding: 0.2rem;
+  width: fit-content;
+  gap: 0.25rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.pill-option {
+  padding: 0.35rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #fff;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.pill-option:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.pill-option.active {
+  background-color: yellowgreen;
+  color: white;
+  box-shadow: 0 0 5px rgba(154, 205, 50, 0.6);
+}
+
+
+/* Buttons Style */
+.btn {
+  padding: 5px 10px; /* Smaller button size */
+  font-size: 12px; /* Smaller text */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Clear Filters Button */
+.secondary-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.secondary-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Bulk Edit Button */
+.bulk-edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.bulk-edit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Save Preferences Button */
+.save-preferences-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.save-preferences-btn:hover {
+  background-color: #218838;
+}
+
+/* Success Button (Optional) */
+.success-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.success-btn:hover {
+  background-color: #218838;
+}
+::ng-deep kendo-grid {
+  min-width: 1500px;
+}
+
+::ng-deep .grid-col {
+  padding: 8px 12px;
+  vertical-align: middle;
+}
+
+::ng-deep .grid-col.text-start {
+  text-align: left;
+}
+
+::ng-deep .grid-col.text-center {
+  text-align: center;
+}
+
+::ng-deep .grid-col.text-end {
+  text-align: right;
+}
+
+::ng-deep .grid-col.fw-medium {
+  font-weight: 500;
+}
+
+
+/* General Grid Styling */
+::ng-deep #productsGrid {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Column Headers */
+::ng-deep .k-grid-header {
+  background-color: #f4f4f4;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+}
+
+/* Column Cells */
+::ng-deep .k-grid-content {
+  font-size: 13px;
+  color: #555;
+}
+
+/* Specific Styling for Grid Columns */
+::ng-deep .k-grid-column {
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* When a Row is Being Edited */
+::ng-deep .k-grid-row.editing {
+  background-color: #fffae6 !important; /* Light yellow background */
+  color: #333;
+  font-weight: bold;
+}
+
+/* Input Fields in the Edited Row */
+::ng-deep .k-grid-row.editing .k-input {
+  background-color: #fff8e1; /* Light yellow input field */
+  border: 1px solid #ffcc00; /* Yellow border */
+}
+
+/* Hover Effect on Rows */
+::ng-deep .k-grid-content .k-grid-row:hover {
+  background-color: #f1f1f1;
+}
+
+/* Styling for the Pagination Section */
+::ng-deep .k-pager-wrap {
+  background-color: #f9f9f9;
+  padding: 8px 16px;
+  border-top: 1px solid #ddd;
+}
+
+::ng-deep .k-pager-info {
+  font-size: 12px;
+  color: #777;
+}
+
+::ng-deep .k-pager-numbers {
+  font-size: 12px;
+}
+
+/* Buttons */
+::ng-deep .k-button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+::ng-deep .k-button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Column Sticky Styling */
+::ng-deep .k-grid-column.IsQualified.sticky-column {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  ::ng-deep .k-grid-header {
+    font-size: 12px;
+  }
+
+  ::ng-deep .k-grid-column {
+    padding: 6px;
+  }
+
+  ::ng-deep .k-grid-content {
+    font-size: 12px;
+  }
+}
+
+
+
+.kendo-dropdownlist {
+  width: 100%; /* Make sure the dropdown takes full width of the cell */
+  box-sizing: border-box; /* To ensure the dropdown fills the container */
+}
+
+
+::ng-deep .k-dropdown {
+  width: 100%;
+  text-align: center;  /* Ensures the text inside the dropdown is centered */
+  padding: 5px;
+}
+
+::ng-deep .k-grid .k-grid-cell  .k-input {
+  text-align: center;  /* Ensure the dropdown text is centered */
+}
+
+::ng-deep .k-grid .k-grid-cell {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+::ng-deep .k-grid .k-grid-cell {
+  padding: 5px;
+  display: flex;
+  justify-content: center; /* Center cell content */
+  align-items: center; /* Align items vertically in the center */
+}
+

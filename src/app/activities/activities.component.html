@@ -1,75 +1,177 @@
-<kendo-grid
+<div class="d-flex flex-wrap align-items-center gap-3 w-100">
+  <kendo-grid [data]="view" #productsGrid id="productsGrid" (cellClick)="cellClickHandler($event)" (add)="addHandler()"
+    [height]="600" [columnMenu]="{ filter: true }" [scrollable]="'scrollable'" [sortable]="true" [reorderable]="true"
+    [resizable]="true" [style.min-width.px]="1000" [scrollable]="'scrollable'" (edit)="onRowEdit($event)" (save)="onSaveEdit($event)" [pageable]="true" [sortable]="true" >
 
-  [data]="view"
-  #productsGrid
-  id="productsGrid"
-      (cellClick)="cellClickHandler($event)"
-      (add)="addHandler()"
-  [height]="500"
-  
->
-<!-- <ng-template kendoGridToolbarTemplate>
-  @if (!formGroup) {
-  <button kendoGridAddCommand>Add new</button>
-  } @if (formGroup) {
-  <div>
-    <button kendoButton [disabled]="!formGroup.valid" (click)="saveRow()">
-      Save
-    </button>
-    <button kendoButton themeColor="primary" (click)="cancelHandler()">
-      Cancel
-    </button>
-  </div>
-  }
-</ng-template> -->
-<ng-template kendoGridToolbarTemplate>
-  <button *ngIf="!formGroup" kendoGridAddCommand>Add new</button>
+    <ng-template kendoGridToolbarTemplate>
 
-  <div *ngIf="formGroup">
-    <button kendoButton [disabled]="!formGroup.valid" (click)="saveRow()">Save</button>
-    <button kendoButton themeColor="primary" (click)="cancelHandler()">Cancel</button>
-  </div>
+      <div style="display: block; width: 100%;"> <!-- Ensure this div takes the full width -->
 
-  
-</ng-template>
+        <!-- First Row: Title and Action Buttons -->
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+          <!-- Left: Title -->
+          <div class="d-flex flex-column">
+            <h5 class="k-text-info fw-bold m-0">Lead Management</h5>
+            <small class="k-text-info">Leads</small>
+          </div>
+
+          <!-- Right: Buttons -->
+          <div class="d-flex align-items-center gap-2 mt-2 mt-md-0"
+            style="flex-wrap: wrap; justify-content: flex-start;">
+
+            <!-- Export to Excel Button -->
+            <button kendoButton icon="file-excel" class="border border-dark bg-success text-light px-2 py-1"
+              style="font-size: 14px; min-width: auto;">
+              <span class="k-icon k-i-file-excel"></span> Export to Excel
+            </button>
+
+            <!-- Create Lead Button -->
+            <button *ngIf="!formGroup" kendoButton kendoGridAddCommand themeColor="success" class="border px-2 py-1"
+              style="font-size: 14px; min-width: auto;">
+              <span class="k-icon k-i-plus"></span> Create Lead
+            </button>
+
+            <div *ngIf="formGroup" class="d-flex gap-2" style="flex-wrap: wrap; justify-content: flex-start;">
+
+              <!-- Save Button -->
+              <button kendoButton [disabled]="!formGroup.valid" (click)="saveRow()" class="px-2 py-1"
+                style="font-size: 14px; min-width: auto;">
+                Save
+              </button>
+
+              <!-- Cancel Button -->
+              <button kendoButton themeColor="primary" (click)="cancelHandler()" class="px-2 py-1"
+                style="font-size: 14px; min-width: auto;">
+                Cancel
+              </button>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- Second Row: Filters and Action Buttons -->
+        <div class="d-flex justify-content-between align-items-center flex-wrap mb-3 gap-3">
+
+          <!-- Left Side: Filters -->
+          <div class="d-flex flex-wrap align-items-center gap-3">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+              <!-- Filter by Source Dropdown with Placeholder -->
+              <kendo-dropdownlist [data]="['Source A', 'Source B', 'Source C']" placeholder="Select Lead"
+                style="width: 220px; height: 35px; font-size: 14px;">
+              </kendo-dropdownlist>
+
+              <!-- Filter by User Dropdown with Placeholder -->
+              <kendo-dropdownlist [data]="['User A', 'User B', 'User C']" placeholder="Save Preferences"
+                style="width: 220px; height: 35px; font-size: 14px;">
+              </kendo-dropdownlist>
+            </div>
 
 
 
-  <kendo-grid-column field="FirstName" title="First Name"></kendo-grid-column>
-  <kendo-grid-column field="LastName" title="Last Name"></kendo-grid-column>
-  <kendo-grid-column field="Email" title="Email"></kendo-grid-column>
-  <kendo-grid-column field="Phone" title="Phone"></kendo-grid-column>
-  <kendo-grid-column field="CompanyName" title="Company"></kendo-grid-column>
-  <kendo-grid-column field="LeadSource" title="Source"></kendo-grid-column>
-  <kendo-grid-column
-    field="AssignedTo"
-    title="Assigned To"
-  ></kendo-grid-column>
-  <!-- <kendo-grid-column
-    field="StatusID"
-    editor="numeric"
-    title="Status ID"
-  ></kendo-grid-column> -->
-  <kendo-grid-column
-    field="LeadScore"
-    editor="numeric"
-    title="Lead Score"
-  ></kendo-grid-column>
-  <kendo-grid-column
-    field="IsQualified"
-    editor="boolean"
-    title="Qualified"
-  ></kendo-grid-column>
-  <kendo-grid-column field="CreatedDate" title="Created" format="{0:yyyy-MM-dd}">
-    <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
-      <!-- Simple HTML Date Input for editing without pipe -->
-      <input
-        type="date"
-        [formControl]="formGroup.get('CreatedDate')"
-      />
+            <div style="position: relative; display: inline-block; width: 240px;">
+              <input kendoTextBox placeholder="Search..."
+                style="width: 100%; height: 38px; padding-right: 35px; font-size: 14px;" />
+
+              <!-- Search Icon (positioned inside input) -->
+              <span class="k-icon k-i-search" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%);
+               font-size: 18px; color: #666; pointer-events: none;">
+              </span>
+            </div>
+
+
+          </div>
+
+          <!-- Right Side: Toggle + Buttons -->
+          <div class="d-flex flex-wrap align-items-center gap-2">
+
+            <!-- Pill Toggle (No Change) -->
+            <div class="custom-pill-toggle">
+              <span class="pill-option" [class.active]="!isNonIntl" (click)="isNonIntl = false">
+                Intl
+              </span>
+              <span class="pill-option" [class.active]="isNonIntl" (click)="isNonIntl = true">
+                Non-Intl
+              </span>
+            </div>
+
+            <!-- Action Buttons -->
+            <button class="btn custom-btn secondary-btn" (click)="clearFilters()">Clear Filters</button>
+            <button class="btn custom-btn bulk-edit-btn">Bulk Edit</button>
+            <button class="btn custom-btn save-preferences-btn" (click)="savePreferences()">Save Preferences</button>
+            <button class="btn custom-btn success-btn">Menu</button>
+
+          </div>
+        </div>
+
+
+      </div>
     </ng-template>
-  </kendo-grid-column>
-  
-  
-  
-</kendo-grid>
+
+    <!-- Grid Columns with Sortable Attribute -->
+    <kendo-grid-column field="FirstName" title="First Name" [width]="150"
+      class="grid-col text-start fw-medium"></kendo-grid-column>
+    <kendo-grid-column field="LastName" title="Last Name" [width]="150"
+      class="grid-col text-start fw-medium"></kendo-grid-column>
+    <kendo-grid-column field="Email" title="Email" [width]="150"
+      class="grid-col text-start fw-medium"></kendo-grid-column>
+    <kendo-grid-column field="Phone" title="Phone" [width]="150"
+      class="grid-col text-start fw-medium"></kendo-grid-column>
+    <kendo-grid-column field="CompanyName" title="Company" [width]="150"
+      class="grid-col text-start fw-medium"></kendo-grid-column>
+    <kendo-grid-column field="LeadSource" title="Source" [width]="150"
+      class="grid-col text-start fw-medium"></kendo-grid-column>
+    <kendo-grid-column field="AssignedTo" title="Assigned To" [width]="150"
+      class="grid-col text-start fw-medium"></kendo-grid-column>
+
+    <kendo-grid-column field="LeadScore" title="Lead Score" editor="numeric" [width]="120"
+      class="grid-col text-end fw-medium"></kendo-grid-column>
+
+    <kendo-grid-column field="IsQualified" title="Qualified" editor="boolean" [width]="150"
+      class="grid-col text-center fw-medium"></kendo-grid-column>
+
+   <kendo-grid-column field="StatusID" title="Status" [width]="130">
+  <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
+    <kendo-dropdownlist 
+      [data]="statuses"  
+      [valuePrimitive]="true" 
+      textField="StatusName"  
+      valueField="StatusID"
+      [formControl]="formGroup.get('StatusID')" 
+      style="display: flex; justify-content: center; align-items: center;">
+    </kendo-dropdownlist>
+  </ng-template>
+  <ng-template kendoGridCellTemplate let-dataItem>
+    {{ statusName(dataItem.StatusID) }}
+  </ng-template>
+</kendo-grid-column>
+
+
+
+
+
+    <kendo-grid-column field="CreatedDate" title="Created" format="{0:yyyy-MM-dd}" [sortable]="true"
+      class="grid-col text-center fw-medium">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-formGroup="formGroup">
+        <input type="date" [formControl]="formGroup.get('CreatedDate')" />
+      </ng-template>
+    </kendo-grid-column>
+
+    <!-- Sticky column for Qualified (duplicate of above, but sticky) -->
+    <kendo-grid-column field="IsQualified" title="Qualified" [width]="140" 
+      class="grid-col text-center fw-medium">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <input type="checkbox" [checked]="dataItem.IsQualified" disabled />
+      </ng-template>
+      <ng-template kendoGridEditTemplate let-formGroup="formGroup">
+        <input type="checkbox" [formControl]="formGroup.get('IsQualified')" />
+      </ng-template>
+    </kendo-grid-column>
+
+
+
+  </kendo-grid>
+</div>

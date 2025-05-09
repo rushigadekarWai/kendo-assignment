@@ -26,6 +26,12 @@ export class LeadsService {
 
   constructor(private http: HttpClient) {}
 
+  private statusesUrl = 'http://localhost:3000/statuses';
+
+  getStatuses(): Observable<any[]> {
+    return this.http.get<any[]>(this.statusesUrl);
+  }
+
   getLeads(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }

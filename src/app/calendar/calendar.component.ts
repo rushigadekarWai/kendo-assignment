@@ -20,24 +20,23 @@ import { KENDO_DIALOG } from '@progress/kendo-angular-dialog';
 import { ProductService } from './product.service';
 import { menuIcon, paperclipIcon, searchIcon } from '@progress/kendo-svg-icons';
 import { KENDO_TREEVIEW } from '@progress/kendo-angular-treeview';
+import { ActivitiesComponent } from "../activities/activities.component";
 
 @Component({
   selector: 'app-calendar',
   imports: [
     DropDownsModule,
-   
     ReactiveFormsModule,
     IconsModule,
     KENDO_AVATAR,
     LayoutModule,
     IndicatorsModule,
-
     KENDO_TABSTRIP,
     KENDO_DROPDOWNBUTTON,
     KENDO_DROPDOWNLIST,
     DropDownsModule,
     KENDO_DROPDOWNBUTTON,
-   TemplateEditingDirective,
+    TemplateEditingDirective,
     KENDO_ICONS,
     KENDO_BUTTON,
     KENDO_BUTTONS,
@@ -51,9 +50,9 @@ import { KENDO_TREEVIEW } from '@progress/kendo-angular-treeview';
     KENDO_TOOLBAR,
     KENDO_APPBAR,
     KENDO_DROPDOWNBUTTON,
-    KENDO_TOGGLEBUTTONTABSTOP, DropDownsModule, KENDO_CHECKBOX, KENDO_TEXTBOX,KENDO_DIALOG, KENDO_DROPDOWNBUTTON, KENDO_GRID_EXCEL_EXPORT , KENDO_EXCELEXPORT, KENDO_ICONS, NgIf, KENDO_TREEVIEW, ReactiveFormsModule
-    
-  ],
+    KENDO_TOGGLEBUTTONTABSTOP, DropDownsModule, KENDO_CHECKBOX, KENDO_TEXTBOX, KENDO_DIALOG, KENDO_DROPDOWNBUTTON, KENDO_GRID_EXCEL_EXPORT, KENDO_EXCELEXPORT, KENDO_ICONS, NgIf, KENDO_TREEVIEW, ReactiveFormsModule,
+    ActivitiesComponent
+],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css'
 })
