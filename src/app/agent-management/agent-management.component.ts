@@ -112,7 +112,7 @@ export class AgentManagementComponent {
     Notes: new FormControl('No notes provided.'),  // Default to 'No notes provided.'
     LeadScore: new FormControl(0),  // Default to 0
     IsQualified: new FormControl(false)  // Default to false
-      // ❌ Do NOT include id here
+     
     });
     sender.addRow(this.formGroup);
   }

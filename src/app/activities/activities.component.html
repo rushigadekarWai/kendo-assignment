@@ -1,7 +1,7 @@
 <div class="d-flex flex-wrap align-items-center gap-3 w-100">
-  <kendo-grid [data]="view" #productsGrid id="productsGrid" (cellClick)="cellClickHandler($event)" (add)="addHandler()"
+  <kendo-grid [data]="view" #grid #productsGrid id="productsGrid" (cellClick)="cellClickHandler($event)" (add)="addHandler()"
     [height]="600" [columnMenu]="{ filter: true }" [scrollable]="'scrollable'" [sortable]="true" [reorderable]="true"
-    [resizable]="true" [style.min-width.px]="1000" [scrollable]="'scrollable'" (edit)="onRowEdit($event)" (save)="onSaveEdit($event)" [pageable]="true" [sortable]="true" >
+    [resizable]="true" [style.min-width.px]="1000" [scrollable]="'scrollable'" (edit)="onRowEdit($event)" (save)="onSaveEdit($event)" [pageable]="true" [sortable]="true"  >
 
     <ng-template kendoGridToolbarTemplate>
 
@@ -99,9 +99,9 @@
             </div>
 
             <!-- Action Buttons -->
-            <button class="btn custom-btn secondary-btn" (click)="clearFilters()">Clear Filters</button>
+            <button class="btn custom-btn secondary-btn" >Clear Filters</button>
             <button class="btn custom-btn bulk-edit-btn">Bulk Edit</button>
-            <button class="btn custom-btn save-preferences-btn" (click)="savePreferences()">Save Preferences</button>
+            <button class="btn custom-btn save-preferences-btn" >Save Preferences</button>
             <button class="btn custom-btn success-btn">Menu</button>
 
           </div>
@@ -161,15 +161,16 @@
     </kendo-grid-column>
 
     <!-- Sticky column for Qualified (duplicate of above, but sticky) -->
-    <kendo-grid-column field="IsQualified" title="Qualified" [width]="140" 
-      class="grid-col text-center fw-medium">
-      <ng-template kendoGridCellTemplate let-dataItem>
-        <input type="checkbox" [checked]="dataItem.IsQualified" disabled />
-      </ng-template>
-      <ng-template kendoGridEditTemplate let-formGroup="formGroup">
-        <input type="checkbox" [formControl]="formGroup.get('IsQualified')" />
-      </ng-template>
-    </kendo-grid-column>
+  <kendo-grid-column field="IsQualified" title="Qualified" [width]="140">
+  <ng-template kendoGridCellTemplate let-dataItem>
+    <input type="checkbox" [checked]="dataItem.IsQualified" disabled />
+  </ng-template>
+
+  <ng-template kendoGridEditTemplate let-formGroup="formGroup" let-isNew="isNew">
+    <input type="checkbox" [formControl]="formGroup.get('IsQualified')" />
+  </ng-template>
+</kendo-grid-column>
+
 
 
 

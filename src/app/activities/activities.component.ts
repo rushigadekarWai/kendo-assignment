@@ -10,6 +10,7 @@ import { KENDO_DROPDOWNLIST } from '@progress/kendo-angular-dropdowns';
 import { KENDO_BUTTON } from '@progress/kendo-angular-buttons';
 import { menuIcon, paperclipIcon, searchIcon } from '@progress/kendo-svg-icons';
 import { KENDO_ICONS, KENDO_SVGICON } from '@progress/kendo-angular-icons';
+import { ColumnComponent } from '@progress/kendo-angular-excel-export';
 
 const createFormGroup = (dataItem: any) =>
   new FormGroup({
@@ -32,7 +33,7 @@ const createFormGroup = (dataItem: any) =>
       Validators.min(0),
       Validators.max(100),
     ]),
-    IsQualified: new FormControl(dataItem.IsQualified || false),
+     IsQualified: new FormControl(dataItem.IsQualified !== undefined ? dataItem.IsQualified : false),
     CreatedDate: new FormControl(dataItem.CreatedDate ? new Date(dataItem.CreatedDate) : new Date()),
     
 
@@ -68,6 +69,7 @@ export class ActivitiesComponent {
   private docClickSubscription: Subscription = new Subscription();
   // public formGroup:any = FormGroup;
   public formGroup: FormGroup<any> | null = null;
+  public displayedColumns: any[] = [];
 
   // public formGroup: FormGroup<any> | null = null;
 
@@ -90,12 +92,19 @@ public icons = { paperclip: paperclipIcon,
 
   constructor(private leadService: LeadsService, private renderer: Renderer2) {}
 
+  // In your component.ts
+
+
   ngOnInit(): void {
     this.loadLeads();
     this.docClickSubscription.add(
       this.renderer.listen("document", "click", this.onDocumentClick.bind(this))
     );
      this.loadStatus();
+
+
+    //  save preferences 
+     
   }
 
   loadLeads(): void {
@@ -142,7 +151,7 @@ public icons = { paperclip: paperclipIcon,
       LeadSource: '',
       AssignedTo: '',
       LeadScore: 0,
-      IsQualified: false,
+       IsQualified: new FormControl(false),
       CreatedDate: new Date(),
      StatusID: new FormControl(1, Validators.required),
     });
@@ -283,14 +292,6 @@ applyFilters(): void {
     (!this.selectedSource || lead.LeadSource === this.selectedSource) &&
     (!this.selectedUser || lead.AssignedTo === this.selectedUser)
   );
-}
-
-savePreferences(): void {
-  console.log('Saved user preferences:', {
-    source: this.selectedSource,
-    user: this.selectedUser,
-    search: this.searchTerm,
-  });
 }
 
 }
