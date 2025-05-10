@@ -248,3 +248,7 @@
   align-items: center; /* Align items vertically in the center */
 }
 
+
+::ng-deep .k-checkbox {
+  border: 1px solid #333;
+}

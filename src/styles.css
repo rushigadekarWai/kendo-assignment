@@ -1,3 +1,127 @@
-/* body{
-  background-color: #333;
+/* Dark Mode - global overrides */
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .k-grid {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border-color: #333;
+}
+
+.dark-mode .k-grid-header,
+.dark-mode .k-grid-toolbar,
+.dark-mode .k-grid-content,
+.dark-mode .k-grid-footer {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.dark-mode .k-grid th.k-header {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border-color: #444;
+}
+
+.dark-mode .k-grid td {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border-color: #333;
+}
+
+/* Buttons */
+.dark-mode .k-button,
+.dark-mode button {
+  background-color: #2d2d2d;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+
+.dark-mode .k-button:hover,
+.dark-mode button:hover {
+  background-color: #3a3a3a;
+}
+
+/* Inputs, Dropdowns, Search */
+.dark-mode input,
+.dark-mode .k-textbox,
+.dark-mode .k-dropdown,
+.dark-mode .k-dropdownlist {
+  background-color: #2a2a2a !important;
+  color: #fff !important;
+  border-color: #444 !important;
+}
+
+/* Icons */
+.dark-mode .k-icon {
+  color: #ccc;
+}
+
+/* Search input */
+.dark-mode input::placeholder {
+  color: #aaa;
+}
+
+/* Toolbar header text */
+.dark-mode h5,
+.dark-mode small {
+  color: #e0e0e0;
+}
+
+/* Border or HR styling */
+.dark-mode hr {
+  border-color: #444;
+}
+
+/* Custom pills */
+/* .dark-mode .custom-pill-toggle .pill-option {
+  background-color: #2d2d2d;
+  color: #ccc;
+  border: 1px solid #444;
 } */
+
+/* .dark-mode .custom-pill-toggle .pill-option.active {
+  background-color: #4a90e2;
+  color: #fff;
+} */
+
+/* Dropdown open popup */
+.dark-mode .k-animation-container,
+.dark-mode .k-popup {
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+/* Optional: Fix focus outlines */
+.dark-mode *:focus {
+  outline: 1px solid #555;
+}
+
+.dark-mode .k-tabstrip-top > .k-tabstrip-content{
+   background-color: #121212;
+}
+
+/* .dark-mode .navbar-custom {
+  background-color: #121212;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  
+} */
+ .dark-mode .navbar-custom[_ngcontent-ng-c928161792] {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05); /* subtle light shadow for dark bg */
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: #e0e0e0;
+}
+
+.dark-mode .navbar-custom[_ngcontent-ng-c928161792] a,
+.dark-mode .navbar-custom[_ngcontent-ng-c928161792] .nav-link,
+.dark-mode .navbar-custom[_ngcontent-ng-c928161792] .navbar-brand {
+  color: #e0e0e0;
+}
+
+.dark-mode .navbar-custom[_ngcontent-ng-c928161792] a:hover,
+.dark-mode .navbar-custom[_ngcontent-ng-c928161792] .nav-link:hover {
+  color: #ffffff;
+}

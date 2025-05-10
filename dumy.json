@@ -7,10 +7,10 @@
       "Email": "john.doe@example.com",
       "Phone": "123-456-7890",
       "CompanyName": "TechCorp",
-      "LeadSource": "Web",
+      "LeadSource": "Webr",
       "AssignedTo": "Chris Green",
       "StatusID": 6,
-      "LeadScore": 2,
+      "LeadScore": 5,
       "IsQualified": true,
       "CreatedDate": "2025-05-08T00:00:00.000Z"
     },
@@ -24,7 +24,7 @@
       "LeadSource": "Referral",
       "AssignedTo": "Ashley Moore",
       "StatusID": 2,
-      "LeadScore": 2,
+      "LeadScore": 5,
       "IsQualified": true,
       "CreatedDate": "2025-01-01T00:00:00.000Z"
     },
@@ -93,9 +93,9 @@
       "CompanyName": "WAU",
       "LeadSource": "Web",
       "AssignedTo": "Rushi Patel",
-      "StatusID": 6,
-      "LeadScore": 2,
-      "IsQualified": true,
+      "StatusID": 3,
+      "LeadScore": 5,
+      "IsQualified": false,
       "CreatedDate": "2025-05-07T00:00:00.000Z"
     },
     {
@@ -108,7 +108,7 @@
       "LeadSource": "wa",
       "AssignedTo": "wa",
       "StatusID": 3,
-      "LeadScore": 2,
+      "LeadScore": 3,
       "IsQualified": true,
       "CreatedDate": "2025-05-09T00:00:00.000Z"
     },
@@ -125,6 +125,34 @@
       "LeadScore": 5,
       "IsQualified": true,
       "CreatedDate": "2025-05-10T04:51:40.269Z"
+    },
+    {
+      "id": "4929",
+      "FirstName": "Raaghu",
+      "LastName": "Ai",
+      "Email": "waiinRaghu@in.com",
+      "Phone": "114564164",
+      "CompanyName": "WAI Tech",
+      "LeadSource": "Wai",
+      "AssignedTo": "Wai",
+      "StatusID": 3,
+      "LeadScore": 13,
+      "IsQualified": true,
+      "CreatedDate": "2025-05-10T05:24:42.331Z"
+    },
+    {
+      "id": "b488",
+      "FirstName": "aaa",
+      "LastName": "aa",
+      "Email": "dda@a.com",
+      "Phone": "1111111111",
+      "CompanyName": "55r",
+      "LeadSource": "t6",
+      "AssignedTo": "r6r6",
+      "StatusID": 1,
+      "LeadScore": 0,
+      "IsQualified": true,
+      "CreatedDate": "2025-05-10T06:03:53.398Z"
     }
   ],
   "statuses": [

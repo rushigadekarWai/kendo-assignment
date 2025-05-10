@@ -6,59 +6,35 @@ import { KENDO_APPBAR } from '@progress/kendo-angular-navigation';
 import { Lead, LeadsService } from './leads.service';
 import { Subscription } from 'rxjs';
 import { NgIf } from '@angular/common';
-import { KENDO_DROPDOWNLIST } from '@progress/kendo-angular-dropdowns';
+import { KENDO_DROPDOWNLIST, KENDO_DROPDOWNTREE } from '@progress/kendo-angular-dropdowns';
 import { KENDO_BUTTON } from '@progress/kendo-angular-buttons';
 import { menuIcon, paperclipIcon, searchIcon } from '@progress/kendo-svg-icons';
 import { KENDO_ICONS, KENDO_SVGICON } from '@progress/kendo-angular-icons';
-import { ColumnComponent } from '@progress/kendo-angular-excel-export';
+import { ColumnBase, ColumnComponent } from '@progress/kendo-angular-excel-export';
+import { createFormGroup } from './form-utils';
+import { ChildProcess } from 'node:child_process';
+import { process } from '@progress/kendo-data-query';
 
-const createFormGroup = (dataItem: any) =>
-  new FormGroup({
-    id: new FormControl(dataItem.id || null),
-    FirstName: new FormControl(dataItem.FirstName || '', Validators.required),
-    LastName: new FormControl(dataItem.LastName || '', Validators.required),
-    Email: new FormControl(dataItem.Email || '', [
-      Validators.required,
-      Validators.email,
-    ]),
-    Phone: new FormControl(dataItem.Phone || '', [
-      Validators.pattern("^[0-9\\-\\+]{9,15}$")
-    ]),
-    CompanyName: new FormControl(dataItem.CompanyName || ''),
-    LeadSource: new FormControl(dataItem.LeadSource || ''),
-    AssignedTo: new FormControl(dataItem.AssignedTo || ''),
-   StatusID: new FormControl(dataItem.StatusID, Validators.required),
 
-    LeadScore: new FormControl(dataItem.LeadScore || 0, [
-      Validators.min(0),
-      Validators.max(100),
-    ]),
-     IsQualified: new FormControl(dataItem.IsQualified !== undefined ? dataItem.IsQualified : false),
-    CreatedDate: new FormControl(dataItem.CreatedDate ? new Date(dataItem.CreatedDate) : new Date()),
-    
-
-      
-
-  });
-  function formatDateForInput(date: any): string {
-    const d = new Date(date || new Date());
-    const year = d.getFullYear();
-    const month = (`0${d.getMonth() + 1}`).slice(-2); // ensure 2 digits
-    const day = (`0${d.getDate()}`).slice(-2);        // ensure 2 digits
-    return `${year}-${month}-${day}`;
-  }
+function formatDateForInput(date: any): string {
+  const d = new Date(date || new Date());
+  const year = d.getFullYear();
+  const month = (`0${d.getMonth() + 1}`).slice(-2); // ensure 2 digits
+  const day = (`0${d.getDate()}`).slice(-2);        // ensure 2 digits
+  return `${year}-${month}-${day}`;
+}
 
 const matches = (el: any, selector: any) =>
   (el.matches || el.msMatchesSelector).call(el, selector);
 
 @Component({
   selector: 'app-activities',
-  imports: [KENDO_GRID, KENDO_INPUTS, KENDO_APPBAR, ReactiveFormsModule, FormsModule, NgIf, KENDO_TEXTBOX, KENDO_DROPDOWNLIST],
+  imports: [KENDO_GRID, KENDO_INPUTS, KENDO_APPBAR, ReactiveFormsModule, FormsModule, NgIf, KENDO_TEXTBOX, KENDO_DROPDOWNLIST, KENDO_DROPDOWNTREE],
   templateUrl: './activities.component.html',
   styleUrl: './activities.component.css'
 })
 export class ActivitiesComponent {
-  @ViewChild(GridComponent) private grid!: GridComponent;
+  // @ViewChild(GridComponent) private grid!: GridComponent;
   public isNew = false;
   public leads: Lead[] = [];
   public statuses: any[] = [];
@@ -67,44 +43,34 @@ export class ActivitiesComponent {
   private editedRowIndex: number | null = null; 
   isNonIntl = false;
   private docClickSubscription: Subscription = new Subscription();
-  // public formGroup:any = FormGroup;
   public formGroup: FormGroup<any> | null = null;
   public displayedColumns: any[] = [];
 
-  // public formGroup: FormGroup<any> | null = null;
-
   onRowEdit(event:any) {
-  const row = event.sender.element.find('tr');
-  row.addClass('editing');
-}
+    const row = event.sender.element.find('tr');
+    row.addClass('editing');
+  }
 
-onSaveEdit(event: any) {
-  const row = event.sender.element.find('tr');
-  row.removeClass('editing');
-}
+  onSaveEdit(event: any) {
+    const row = event.sender.element.find('tr');
+    row.removeClass('editing');
+  }
 
-
-public icons = { paperclip: paperclipIcon,
-  searchIcon: searchIcon,
-  menuIcon: menuIcon
-
- };
+  public icons = { paperclip: paperclipIcon,
+    searchIcon: searchIcon,
+    menuIcon: menuIcon
+  };
 
   constructor(private leadService: LeadsService, private renderer: Renderer2) {}
-
-  // In your component.ts
-
 
   ngOnInit(): void {
     this.loadLeads();
     this.docClickSubscription.add(
       this.renderer.listen("document", "click", this.onDocumentClick.bind(this))
     );
-     this.loadStatus();
-
-
-    //  save preferences 
-     
+    this.loadStatus();
+      this.savedPreferences = Object.keys(localStorage); 
+    
   }
 
   loadLeads(): void {
@@ -113,29 +79,26 @@ public icons = { paperclip: paperclipIcon,
       this.view = [...this.leads];
     });
   }
+
   loadStatus() {
     this.leadService.getStatuses().subscribe((data) => {
       this.statuses = data;
-      console.log(this.statuses);
+      // console.log(this.statuses);
     });
   }
 
   ngOnDestroy(): void {
     this.docClickSubscription.unsubscribe();
   }
-  // statusName(id: number): string {
-  //   return this.statuses.find((x) => x.StatusID === id)?.StatusName || '';
-  // }
+
   statusName(id: number): string {
-  const status = this.statuses.find((x) => x.StatusID === id);
-  if (status) {
-    return status.StatusName;
+    const status = this.statuses.find((x) => x.StatusID === id);
+    if (status) {
+      return status.StatusName;
+    }
+    console.warn(`StatusID ${id} not found`);
+    return '';  // Fallback to empty string
   }
-  console.warn(`StatusID ${id} not found`);
-  return '';  // Fallback to empty string
-}
-
-
 
   public addHandler(): void {
     this.closeEditor();
@@ -151,21 +114,15 @@ public icons = { paperclip: paperclipIcon,
       LeadSource: '',
       AssignedTo: '',
       LeadScore: 0,
-       IsQualified: new FormControl(false),
+      IsQualified: new FormControl(false),
       CreatedDate: new Date(),
-     StatusID: new FormControl(1, Validators.required),
+      StatusID: new FormControl(1, Validators.required),
     });
 
     this.isNew = true;
-    // this.isInEditingMode = true;
     this.grid.addRow(this.formGroup);
   }
 
-  // public saveRow(): void {
-  //   if (this.formGroup && this.formGroup.valid) {
-  //     this.saveCurrent();
-  //   }
-  // }
   public saveRow(): void {
     if (this.formGroup && this.formGroup.valid) {
       this.saveCurrent();
@@ -173,8 +130,6 @@ public icons = { paperclip: paperclipIcon,
     } else {
       console.warn("Form invalid", this.formGroup?.errors);
     }
-    // console.log("Saving lead:", this.formGroup.value);  // 👈 Should now show `id`
-
   }
 
   public cellClickHandler({
@@ -192,11 +147,13 @@ public icons = { paperclip: paperclipIcon,
       rowIndex += 1;
     }
 
-    this.saveCurrent();
+    this.closeEditor()
+  //    if (this.formGroup) {
+  //   this.saveCurrent();
+  // }
 
     this.formGroup = createFormGroup(dataItem);
     this.editedRowIndex = rowIndex;
-    // this.isInEditingMode = true;
     this.grid.editRow(rowIndex, this.formGroup);
   }
 
@@ -205,11 +162,10 @@ public icons = { paperclip: paperclipIcon,
   }
 
   private closeEditor(): void {
-    this.grid.closeRow(this.editedRowIndex?? undefined);
+    this.grid.closeRow(this.editedRowIndex ?? undefined);
 
     this.isNew = false;
     this.editedRowIndex = null;
-    // this.isInEditingMode = false;
     this.formGroup = null;
   }
 
@@ -218,25 +174,10 @@ public icons = { paperclip: paperclipIcon,
         !matches(e.target, '#productsGrid tbody *, #productsGrid .k-grid-toolbar .k-button')) {
         this.saveCurrent();
     }
-}
-
+  }
 
   private saveCurrent(): void {
-    // if (this.formGroup && this.formGroup.valid) {
-    //   const leadData = this.formGroup.value;
-
-    //   this.leadService.save(leadData, this.isNew).subscribe({
-    //     next: () => {
-    //       this.loadLeads();
-    //       this.closeEditor();
-    //     },
-    //     error: (err) => {
-    //       console.error('Error saving lead:', err);
-    //     }
-    //   });
-    // }
-
-    if(this.formGroup){
+    if (this.formGroup) {
       const leadData = this.formGroup.value;
       this.leadService.save(leadData, this.isNew).subscribe({
         next: () => {
@@ -247,51 +188,110 @@ public icons = { paperclip: paperclipIcon,
           console.error('Error saving lead:', err);
         }
       });
-      
     }
   }
 
 
+  areaData = [
+    {
+      id: 1,
+      text: 'Option 1',
+      areas: [
+        { id: 11, text: 'Sub-option 1-1' },
+        { id: 12, text: 'Sub-option 1-2' },
+      ],
+    },
+    {
+      id: 2,
+      text: 'Option 2',
+      areas: [
+        { id: 21, text: 'Sub-option 2-1' },
+        { id: 22, text: 'Sub-option 2-2' },
+      ],
+    },
+  ];
+   public LeadItems: Array<string> = ["Item 1", "Item 2", "Item 3"];
+
+  public listItems: Array<string> = [
+    "Baseball",
+    "Basketball",
+    "Cricket",
+    "Field Hockey",
+    "Football",
+    "Table Tennis",
+    "Tennis",
+    "Volleyball",
+  ];
 
 
-  public onFilter(inputValue: string): void {
-    
+   public savedPreferences: string[] = [];  // Array to hold saved preference names
+  public selectedPreference: string = '';
 
-    // this.dataBinding.skip = 0;
+  //  public savedPreferences: string[] = [];
+
+    @ViewChild('grid') grid!: GridComponent;
+
+    public columns: any[] = [];
+  clearFilters(): void {}
+
+   savePreferences(grid: GridComponent): void {
+   const columns: any[] = grid.columns.toArray();
+
+   console.log(columns)
+    //the ordered Grid columns as per their orderIndex
+    const orderedColumns: any[] = columns.sort(
+      (a, b) => a.orderIndex - b.orderIndex
+    );
+
+   
+    }
+
+    loadColumnOrder(){}
+
+
+
+
+
+
+
+      public value: any;
+public searchValue: string = '';
+    onFilter(inputValue: string): void {
+  this.view = process(this.leads, {
+  filter: {
+    logic: "or",
+    filters: [
+      { field: "FirstName", operator: "contains", value: inputValue },
+      { field: "LastName", operator: "contains", value: inputValue },
+      { field: "Email", operator: "contains", value: inputValue },
+      // { field: "Phone", operator: "contains", value: inputValue },
+      { field: "CompanyName", operator: "contains", value: inputValue },
+      { field: "LeadSource", operator: "contains", value: inputValue },
+      { field: "AssignedTo", operator: "contains", value: inputValue }
+    ]
+  }
+}).data;
+
+}
+
+
+
+
   }
 
-  public searchTerm = '';
-public selectedSource: string | null = null;
-public selectedUser: string | null = null;
+  // This method loads the selected column order from localStorage
+  
 
-public leadSources: string[] = ['Web', 'Email', 'Phone']; // example
-public assignedUsers: string[] = ['Alice', 'Bob', 'Charlie']; // example
 
-onSearchChange(): void {
-  this.applyFilters();
-}
 
-onSourceFilterChange(value: string): void {
-  this.applyFilters();
-}
+  
 
-onUserFilterChange(value: string): void {
-  this.applyFilters();
-}
 
-clearFilters(): void {
-  this.searchTerm = '';
-  this.selectedSource = null;
-  this.selectedUser = null;
-  this.applyFilters();
-}
+  
 
-applyFilters(): void {
-  this.view = this.leads.filter(lead =>
-    (!this.searchTerm || lead.FirstName?.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
-    (!this.selectedSource || lead.LeadSource === this.selectedSource) &&
-    (!this.selectedUser || lead.AssignedTo === this.selectedUser)
-  );
-}
 
-}
+
+
+
+
+

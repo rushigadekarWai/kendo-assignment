@@ -1,7 +1,7 @@
 <div class="d-flex flex-wrap align-items-center gap-3 w-100">
   <kendo-grid [data]="view" #grid #productsGrid id="productsGrid" (cellClick)="cellClickHandler($event)" (add)="addHandler()"
     [height]="600" [columnMenu]="{ filter: true }" [scrollable]="'scrollable'" [sortable]="true" [reorderable]="true"
-    [resizable]="true" [style.min-width.px]="1000" [scrollable]="'scrollable'" (edit)="onRowEdit($event)" (save)="onSaveEdit($event)" [pageable]="true" [sortable]="true"  >
+    [resizable]="true" [style.min-width.px]="1000" [scrollable]="'scrollable'" (edit)="onRowEdit($event)" (save)="onSaveEdit($event)"  [sortable]="true"  [selectable]="{ checkboxOnly: true, mode: 'multiple' }">
 
     <ng-template kendoGridToolbarTemplate>
 
@@ -52,6 +52,8 @@
 
         </div>
 
+        <hr style="width: 100%; color: #666; font-weight: bold;" class="text-success w-100 k-font-weight-bold">
+
 
         <!-- Second Row: Filters and Action Buttons -->
         <div class="d-flex justify-content-between align-items-center flex-wrap mb-3 gap-3">
@@ -60,13 +62,24 @@
           <div class="d-flex flex-wrap align-items-center gap-3">
             <div class="d-flex flex-wrap align-items-center gap-3">
               <!-- Filter by Source Dropdown with Placeholder -->
-              <kendo-dropdownlist [data]="['Source A', 'Source B', 'Source C']" placeholder="Select Lead"
+              <!-- <kendo-dropdownlist [data]="['Source A', 'Source B', 'Source C']" placeholder="Select Lead"
                 style="width: 220px; height: 35px; font-size: 14px;">
-              </kendo-dropdownlist>
+              </kendo-dropdownlist> -->
 
+                <div class="k-form-field-wrap">
+      <kendo-dropdownlist
+        #items
+        adaptiveMode="auto"
+         defaultItem="All leads"
+        [data]="LeadItems"
+        kendoDropDownFilter
+         style="width: 220px; height: 35px; font-size: 14px; font-weight: 700; border: 1px solid #666; color: #666;"
+      >
+      </kendo-dropdownlist>
+    </div>
               <!-- Filter by User Dropdown with Placeholder -->
-              <kendo-dropdownlist [data]="['User A', 'User B', 'User C']" placeholder="Save Preferences"
-                style="width: 220px; height: 35px; font-size: 14px;">
+              <kendo-dropdownlist [data]="listItems" defaultItem="Save Preferences"
+                style="width: 220px; height: 35px; font-size: 14px; font-weight: 700; border: 1px solid #666; color: #666;">
               </kendo-dropdownlist>
             </div>
 
@@ -74,11 +87,12 @@
 
             <div style="position: relative; display: inline-block; width: 240px;">
               <input kendoTextBox placeholder="Search..."
-                style="width: 100%; height: 38px; padding-right: 35px; font-size: 14px;" />
+                style="width: 100%; height: 38px; padding-right: 35px; font-size: 14px; border: 1px solid #666; font-weight: 500;"  [(ngModel)]="searchValue"
+  (ngModelChange)="onFilter($event)" />
 
               <!-- Search Icon (positioned inside input) -->
               <span class="k-icon k-i-search" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%);
-               font-size: 18px; color: #666; pointer-events: none;">
+               font-size: 18px; color: #666; pointer-events: none; font-weight: 7 00;">
               </span>
             </div>
 
@@ -99,10 +113,10 @@
             </div>
 
             <!-- Action Buttons -->
-            <button class="btn custom-btn secondary-btn" >Clear Filters</button>
+            <button class="btn custom-btn secondary-btn" (click)="loadColumnOrder()">Clear Filters</button>
             <button class="btn custom-btn bulk-edit-btn">Bulk Edit</button>
-            <button class="btn custom-btn save-preferences-btn" >Save Preferences</button>
-            <button class="btn custom-btn success-btn">Menu</button>
+            <button class="btn custom-btn save-preferences-btn" (click)="savePreferences(grid)">Save Preferences</button>
+            <button class="btn custom-btn success-btn p-2">  <span class="k-icon k-i-menu k-font-size-sm"></span> </button>
 
           </div>
         </div>
@@ -111,6 +125,23 @@
       </div>
     </ng-template>
 
+     <kendo-grid-column
+    *ngFor="let col of displayedColumns"
+    [field]="col.field"
+    [title]="col.title"
+  ></kendo-grid-column>
+
+    <kendo-grid-checkbox-column [width]="50" [columnMenu]="false" [ariaSort]="false
+    " >
+  </kendo-grid-checkbox-column>
+
+  <kendo-grid-column title="User Settings" [width]="180" [columnMenu]="false">
+    <ng-template kendoGridCellTemplate let-dataItem="dataItem" >
+      <kendo-dropdowntree kendoDropDownTreeExpandable [kendoDropDownTreeHierarchyBinding]="areaData"
+        placeholder="Actions" textField="text" valueField="id" childrenField="areas"
+        class="action-dropdown-btn border border-success-subtle border-2 k-bg-success" style="font-size: 16px; color: #666;  font-weight: 7 00; background-color: #218838; color: #fff; border-radius: 5px; width: 80%;"></kendo-dropdowntree>
+    </ng-template>
+  </kendo-grid-column>
     <!-- Grid Columns with Sortable Attribute -->
     <kendo-grid-column field="FirstName" title="First Name" [width]="150"
       class="grid-col text-start fw-medium"></kendo-grid-column>
